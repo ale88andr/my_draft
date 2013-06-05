@@ -1,0 +1,66 @@
+<div id='register'>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class='reg-header'>Регистрация новой учётной записи</div>
+  <br>
+  <span id="register-header">Присоединяйтесь к нам это молниеносно быстро и легко. Заполните представленные поля своими данными и нажмите кнопку "Регистрация". После успешной регистрации Вы получите доступ ко всем возможностям нашего сайта, Удачи!</span><br><br>
+
+  <table>
+    <tbody>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :username, "Имя пользователя :" %>
+            <%= f.text_field :username %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Придумайте имя для входа на сайт, оно будет использоваться, чтобы идентифицировать вас.</span><br>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :email, "Ваш электронный адресс :" %>
+            <%= f.email_field :email %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Будет использоваться для обратной связи с вами, а так же для восстановления пароля.</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :password, "Пароль :" %>
+            <%= f.password_field :password %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Придумайте пароль, он должен состоять из не менее 8 символов.</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :password_confirmation, "Повторите пароль :" %>
+            <%= f.password_field :password_confirmation %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Повторите пароль, чтобы убедиться в правильности его ввода.</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <div id="registration-footer">
+    <span style='color:red'>*</span> Обратите внимание, что электроный адресс будет скрыт от остальных пользователей, стобы изменить эти, а так же другие настройки можно изменить перейдя в свой профиль пользователя.
+  </div>
+  <br>
+  <div><%= f.submit "Присоединиться", class:'button-primary-light-green' %></div>
+  <br>
+  <%= render "devise/shared/links" %>
+<% end %>
+</div>

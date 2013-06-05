@@ -1,0 +1,7 @@
+%h1 #{current_user.username} , оставьте свой комментарий к публикации '#{@article.title}'
+= form_for ([@article, @article.comments.build]) do |f|
+	.field
+		= f.label :body, "Введите содержимое комментария : "
+		= f.text_area :body
+	.field
+		= f.submit "Отправить комментарий", class:"button-primary-light-green"

@@ -1,0 +1,25 @@
+<div id='toolbox'>
+	<div id="user">
+		<ul>
+			<% if user_signed_in? %>
+				<li>Вы вошли под именем - <b><%= current_user.username %> </b>| &nbsp</li>
+				<li><%= link_to "Мой профиль", edit_user_registration_path %></li>
+				<li>&nbsp|&nbsp</li>
+				<li><%= link_to "Выход", destroy_user_session_path %></li>
+			<% else %>
+				<li><%= link_to "Войти", new_user_session_path %></li>
+				<li>&nbsp|&nbsp</li>
+				<li>Ещё не зарегестрированны?&nbsp</li>
+				<li><%= link_to "Присоединиться", new_user_registration_path %></li>
+			<% end %>
+		</ul>
+	</div>
+	<div id="now-date">
+		<%= image_tag "img/accept.png", :size => '24x24' %>
+		<i>Сегодня : </i>
+		<b><%= Date.current.day %></b>
+		<%= Date.current.strftime('%b') %>
+		<b><%= Date.current.year %></b> г.
+	</div>
+<div class="clearfix"></div>
+</div>

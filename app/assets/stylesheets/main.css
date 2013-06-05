@@ -1,0 +1,732 @@
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+    height:100%;
+}
+
+body {
+    font-size: 1em;
+    line-height: 1.4;
+    font-family: "ProximaNovaLight","Helvetica Neue",Helvetica,Arial,sans-serif;
+    height:100%;
+}
+
+#main {
+    min-height: 100%;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+
+img {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #479ccf;
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 1.7em;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    font-weight: normal;
+    color: #999;
+}
+
+h1 {
+    font-size: 2.0em;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    font-weight: normal;
+    color: #999;
+}
+
+
+
+/* ==========================================================================
+   Chrome Frame prompt
+   ========================================================================== */
+
+.chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+   /* Верхний статичный блок */
+
+    #top-block {
+        background: #1e8cbe;
+        width: 100%;
+        height: 70px;
+        z-index: 999;
+        display: block;
+    }
+
+    #top-block-content {
+        margin: 0 auto;
+        width: 1020px;
+    }
+
+    #branding {
+        margin: 0 15px;
+        width: 225px;
+        float: left;
+    }
+
+    span#branding {
+        display: block;
+        float: left;
+        width: 156px;
+        height: 37px;
+        margin: 17px 0 0 -3px;
+        background: url() top left no-repeat;
+        text-indent: -9999px;
+    }
+
+    #logo {
+        float: left;
+        margin-right: 10px;
+        font-size: 1.7em;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        padding-top: 19px;
+        font-weight: bold;
+        line-height: 1;
+    }
+
+    #navigation {
+        width: 735px;
+        margin: 0 15px;
+        float: left;
+    }
+
+    #menu {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        line-height: 1.0;
+    }
+
+    #navigation nav > ul {
+        float: right;
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+
+    #navigation #menu li {
+        float: left;
+        position: relative;
+    }
+
+    #navigation #menu a {
+        height: 12px;
+        padding: 19px 18px 29px;
+        margin-top: 10px;
+        text-decoration: none;
+        color: #eee;
+        display: block;
+        position: relative;
+    }
+    
+    #navigation #menu a:hover {
+        color: #000;
+    }
+
+    /* Блок с опциями */
+
+    #features {
+    }
+
+    #features-row {
+        background: #f2f7fa;
+        border-bottom: 1px solid #d9dee1;
+        height: 105px;
+    }
+
+    #features-wrap {
+        width: 1020px;
+        margin: 0 auto;
+    }
+
+    #features-wrap a {
+        display: inline-block;
+        height: 104px;
+        width: 125px;
+        text-align: center;
+        font-size: 14px;
+        padding-bottom: 5px;
+        margin-top: -5px;
+        margin-left: 15px;
+    }
+
+    #features-wrap a:hover {
+        border-bottom: 3px solid #479ccf;
+    }
+
+    .features-icon {
+        margin-top: 25px;
+        margin-bottom: -20px;
+        display: block;
+        height: 64px;
+    }
+
+    /* Блок с контентом */
+
+    #content-wrap {
+        width: 1020px;
+        margin: 0 auto;
+        height: 100%;
+    }
+
+    /* Блок с авторизацией */
+
+    #toolbox {
+        width: 100%;
+    }
+
+    #user {
+        height: 25px;
+        background: #f5f5f5;
+        margin: 0;
+        padding: 14px;
+        width: 700px;
+        float: left;
+    }
+
+    #user, #register a:hover {
+        text-decoration: underline;
+    }
+
+    #user ul li {
+        display: block;
+        float: left;
+        font-size: 15px;
+    }
+
+    #now-date {
+        float: right;
+        background-color: #F1F1F1;
+        margin: 0;
+        padding: 14px;
+        height: 25px;
+        width: 260px;
+        text-align: right;
+        color: #333;
+    }
+
+    /* Блок с футером */
+
+    footer {
+      border-top: 1px solid #eaeaea;
+      color: #999;
+      position: relative;
+      margin-top: -2.5em;
+      height: 2.4em;
+    }
+
+    footer a {
+      color: #555;
+    }
+
+    footer a:hover {
+      color: #222;
+    }
+
+    footer small {
+      float: left;
+      margin: 10px;
+    }
+
+    footer ul {
+      float: right;
+      list-style: none;
+      margin: 10px;
+    }
+
+    footer ul li {
+      float: left;
+      margin-left: 10px;
+    }
+
+    #footer-wrap {
+      width: 1020px;
+      margin: auto;
+    }
+
+    /* Кнопки */
+
+    .button-primary-light-green {
+        color: #fff;
+        background: #96bf48;
+        border: 1px solid #8bb43f;
+        text-shadow: 0 1px 0 #80a53a;
+        border-radius: 1px;
+        cursor: pointer;
+        display: inline-block;
+        border-radius: 1px;
+        padding: 7px 15px;
+    }
+
+    .button-primary-light-blue {
+        color: #fff;
+        background: #04a4cc;
+        border: 1px solid #0d8fba;
+        text-shadow: 0 1px 0 #6eb0c6;
+        border-radius: 1px;
+        cursor: pointer;
+        display: inline-block;
+        border-radius: 1px;
+        padding: 7px 15px;
+    }
+
+    .button-primary-light-red {
+        color: #fff;
+        background: #c76b5c;
+        border: 1px solid #b9321c;
+        text-shadow: 0 1px 0 #b9321c;
+        border-radius: 1px;
+        cursor: pointer;
+        display: inline-block;
+        border-radius: 1px;
+        padding: 7px 15px;
+    }
+
+    .view {
+        position: relative;
+        top: -1px;
+        margin: 0 0 0 5px;
+        padding: 1px 5px 2px 5px;
+        font-size: 13px;
+        font-weight: bold;
+        color: #666;
+        background: #e5e5e5;
+        border-radius: 10px;
+    }
+
+    /* Авторизация */
+
+    #sign_in {
+        width: 500px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 5;
+        background: #f3f3f3;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0 0 10px rgba(0,0,0,0.25);
+        -webkit-box-shadow: 0 0 10px;
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    .new_user span {
+        line-height: 16px;
+        color: #678889;
+        text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
+    }
+
+    /*#sign_in input[type=password], input[type=email], input[type=text]{
+        border: 0;
+        border-bottom: 1px solid #CCC;
+        background-color: transparent;
+        box-shadow: none;
+        line-height: 22px;
+        font-size: 15px;
+        width: 90%;
+        color: #7f7f7f;
+        height: auto;
+        border-radius: 2px;
+        letter-spacing: normal;
+        word-spacing: normal;
+        text-indent: 0px;
+        text-shadow: none;
+        display: inline-block;
+        text-align: start;
+        padding: 15px;
+    }*/
+
+    .new_user a:hover {
+        text-decoration: underline;
+    }
+
+    label {
+        font-size: 12px;
+        font-weight: 400;
+        color: #848484;
+        text-transform: uppercase;
+        display: block;
+    }
+
+    .field-about {
+        line-height: 13px;
+        color: #999999;
+        margin-top: 5px;
+    }
+
+    #register-header {
+        font-size: 15px;
+    }
+
+    #registration-footer {
+        background: #f1f1f1;
+        padding: 10px;
+    }
+
+    #admin-res {
+        padding: 10px;
+        margin-top: 5px;
+        background: #fff0f0;
+        border: 1px dashed #f38670;
+        overflow: hidden;
+    }
+
+    #admin-res ul li {
+        list-style-type: none;
+    }
+
+    #admin-res ul li a:hover {
+        text-decoration: underline;
+    }
+
+    .admin-item {
+        float: left;
+        width: 32%;
+    }
+
+    /* Пагинация */
+
+    .paginate {
+        width: 100%;
+        margin: 10px auto;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .paginate a {
+        display: inline-block;
+        padding: 5px;
+        color: #fff;
+        background-color: #479ccf;
+        border-radius: 4px;
+    }
+
+    .paginate a:hover {
+        text-decoration: underline;
+    }
+
+    /* меню действий */
+
+    .manage-item {
+        text-align: right;
+    }
+
+    .manage-item a {
+        display: inline-block;
+        padding: 5px;
+        font-size: 14px;
+        background-color: #f38670;
+        color: #fff;
+    }
+
+    .manage-item a:hover {
+        text-decoration: underline;
+    }
+
+    /* Формы */
+
+    .input-helper {
+        color: #C2C2C2;
+        font-size: 13px;
+    }
+
+/* ==========================================================================
+   Other
+   ========================================================================== */
+
+   span.alert {
+        color: #fff;
+        background-color: #f38670;
+        padding: 10px;
+   }
+
+   span.notice {
+        color: #fff;
+        background-color: #7cb3e6;
+        padding: 10px;
+   }
+
+   span.error {
+        color: #f38670;
+        background-color: #fff;
+        border: 1px solid #f38670;
+        padding: 10px;
+   }
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   Theses examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

@@ -1,0 +1,14 @@
+﻿= form_for @category do |f|
+  - if @category.errors.any?
+    = render "common/errors", object: @category
+
+  .field
+    = f.label :name, "Название категории :"
+    = f.text_field :name
+    %br
+  .field
+    = f.label :description, "Описание категории :"
+    = f.text_area :description
+    %br
+  .actions
+    = f.submit 'Сохранить', :class => "button-primary-light-green"

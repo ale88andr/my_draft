@@ -1,0 +1,35 @@
+<div id="main">
+    <div id="top-block">
+        <div id="top-block-content">
+            <div id="branding">
+                <%= link_to "My_Draft", root_path, id:'logo' %>   
+            </div>
+            <div id="navigation">
+                <nav>
+                    <ul id="menu">
+                        <li><%= link_to "Блог", articles_path %></li>
+                        <li><a href="#">Галлерея</a></li>
+                        <li><a href="#">Чтение</a></li>
+                        <li><a href="#">Новости</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><%= link_to "Эбаут", about_path %></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div id="features">
+        <div id="features-row">
+            <div id="features-wrap">
+                <nav id="feauters-nav">
+                    <a href="#"><span class="features-icon"><%= image_tag "img/target.png", :size => '48x48' %></span><br><span id="features-text">Последние статьи</span></a>
+                    <a href="#"><span class="features-icon"><%= image_tag "img/news.png", :size => '48x48' %></span><br><span id="features-text">Свежие новости</span></a>
+                    <a href="#"><span class="features-icon"><%= image_tag "img/book.png", :size => '48x48' %></span><br><span id="features-text">Что почитать?</span></a>
+                    <a href="#"><span class="features-icon"><%= image_tag "img/star.png", :size => '48x48' %></span><br><span id="features-text">Топ галлереи</span></a>
+                    <a href="#"><span class="features-icon"><%= image_tag "img/message.png", :size => '48x48' %></span><br><span id="features-text">Общение (QMS)</span></a>
+                    <a href="#"><span class="features-icon"><%= image_tag "img/search.png", :size => '48x48' %></span><br><span id="features-text">Поиск</span></a>
+                    <a href="#"><span class="features-icon"><%= image_tag "img/where.png", :size => '48x48' %></span><br><span id="features-text">Где это Я?</span></a>
+                </nav>
+            </div>
+        </div>
+    </div>

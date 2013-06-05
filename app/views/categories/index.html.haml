@@ -1,0 +1,7 @@
+﻿- provide(:title, "Просмотр категорий")
+%h1 Список доступных категорий
+.categories
+	- if !@categories.empty?
+		= render @categories
+	- else
+		.no-item Пока ничего не добавленно

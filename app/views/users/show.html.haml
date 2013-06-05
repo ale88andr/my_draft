@@ -1,0 +1,45 @@
+-provide(:title, "Просмотр пользователя #{@user.username}")
+.show-user
+	%h1 Просмотр профиля пользователя с именем <b>"#{@user.username}"</b>
+	.user-info
+		%table
+			%tr
+				%td Имя пользователя :
+				%td= @user.username
+			%tr
+				%td Email :
+				%td= @user.email
+			%tr
+				%td Показ Email :
+				%td= check_email_show(@user.show_email)
+			%tr
+				%td Тип пользователя:
+				%td= perms @user.role_ids[0]
+			%tr
+				%td Пол пользователя:
+				%td= @user.user_sex ||= 'Не указан'
+			%tr
+				%td Зарегистрирован:
+				%td= format_date @user.created_at
+			%tr
+				%td Последнее посещение:
+				%td #{format_date @user.current_sign_in_at} c IP #{@user.current_sign_in_ip}
+			%tr
+				%td Количество входов на сайт:
+				%td= @user.sign_in_count
+			%tr
+				%td Пользователь оставил о себе следующие сведения:
+				%td= @user.user_about ||= "Сведения не были оставленны"
+			%tr
+				%td День рождения:
+				%td= @user.user_birth ||= "Не известно"
+			%tr
+				%td Страна проживания:
+				%td= @user.user_country ||= "Не известно"
+		
+	.admin-panel
+		%ul
+			%li= link_to "Редактировать", edit_admin_user_path(@user)
+			%li= link_to "Удалить", admin_user_path(@user), :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить пользователя '#{@user.username}'" }
+			%li= link_to "К списку Пользователей", admin_users_path
+.clearfix

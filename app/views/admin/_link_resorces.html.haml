@@ -1,0 +1,23 @@
+#admin-res
+	%h3 Здраствуйте, #{current_user.username}. Добро пожаловать в панель администратора
+	.admin-item
+		%span Ресурсы пользователей :
+		%br
+		%ul
+			%li= link_to "Администрирование пользователей", admin_users_path
+	.admin-item
+		%span Ресурсы, Блог :
+		%br
+		%ul
+			%li= link_to "Администрирование статей", "#"
+			%li= link_to "Администрирование категорий", "#"
+			%li= link_to "Создать статью", new_article_path
+			%li= link_to "Создать категорию", new_category_path
+			%li= link_to "Статьи ожидающие публикации", unpublished_articles_path
+	.admin-item
+		%span Тэги :
+		%br
+		%ul
+			%li= link_to "Администрирование тегов", tags_path
+			%li= link_to "Добавление тегов", new_tag_path
+

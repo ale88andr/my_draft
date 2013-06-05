@@ -1,0 +1,32 @@
+#article
+  .published
+    %span.day= article.created_at.day
+    %span.month= article.created_at.strftime("%b")
+    %br
+    %span.year= article.created_at.year
+  .t
+    .title
+      %h3= link_to article.title, article
+    .author
+      = article.user.username
+    .tag
+      = image_tag "img/tag.png", size:"15x15"
+      - Tag.find(article.tag_ids).each do |tag|
+        = link_to tag.name, tag
+        *
+    .content
+      = article.content
+    .category
+      = link_to article.category.name, category_path(article.category), class:"category"
+      = link_to article.views|| 0, article, class:"category"
+      %br
+      %br
+    .fullread
+      = link_to "Комментариев : #{article.comments.count}", article
+      = link_to 'Читать полностью', article
+    -if can? :manage, Article
+      .manage-item
+        = link_to 'Редактировать', edit_article_path(article)
+        = link_to 'Удалить', article, :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить статью '#{article.title}'?" }
+.clearfix
+%br

@@ -1,0 +1,139 @@
+<%= provide(:title, "Редактирование профиля пользователя #{@user.username}") %>
+<div id='register'>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class='reg-header'>Редактирование своей учётной записи</div>
+  <br>
+  <span id="register-header">Здесь Вы можете отредактировать свой профиль, поменять настройки учётной записи либо изменить или дополнить данные о себе</span><br><br>
+
+  <table>
+    <tbody>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :username, "Имя пользователя :" %>
+            <%= f.text_field :username %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Здесь вы можете изменить логин для входа в свою учётную запись</span><br>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :email, "Ваш электронный адресс :" %>
+            <%= f.email_field :email %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Email используется для обратной связи с вами, а так же для восстановления пароля. Здесь вы можете его поменять.</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :show_email, "Показывать мой Email другим пользователям :" %>
+            <%= f.check_box :show_email %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Поставьте или уберите флажок в зависимости от выбора.</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :password, "Смена пароля :" %>
+            <%= f.password_field :password %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Оставте это поле пустым, если не хотите менять пароль.</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :password_confirmation, "Смена пароля, повтор :" %>
+            <%= f.password_field :password_confirmation %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Повторите новый пароль, чтобы убедиться в правильности его ввода.</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :user_country, "Страна в которой вы проживаете :" %>
+            <%= f.select(:user_country, options_for_select([['Выберите страну',''],['Украина','UA'],['Россия','RU'],['Белоруссия','BE'],['Молдова','ML'],['Польша','PL'],['Казахстан','KZ']])) %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Выберите страну, в которой Вы живёте.</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :user_birth, "Дата вашего рождения :" %>
+            <%= f.date_select(:user_birth, start_year:1970, end_year:2013) %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Укажите дату своего рождения.</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :user_sex, "Ваш пол :" %>
+            <%= f.radio_button :user_sex, '1' %>
+            Мужчина
+            <br><br>
+            <%= f.radio_button :user_sex, '0' %>
+            Женщина
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Здесь можно добавить или изменить данные о себе.</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :user_about, "Информация о пользователе :" %>
+            <%= f.text_area :user_about %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Здесь можно добавить или изменить данные о себе.</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="field">
+          <fieldset>
+            <%= f.label :current_password, "Ваш текущий пароль :" %>
+            <%= f.password_field :current_password %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Вы должны ввести свой текущий пароль чтобы обновить изменённые данные.</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <div id="registration-footer">
+    <h3>Удаление своей учётной записи</h3>
+    <p>Недовольны? <%= button_to "Удалить мою учётную запись", registration_path(resource_name), :data => { :confirm => "Вы уверенны?" }, :method => :delete, :class => 'button-primary-light-red' %></p>
+  </div>
+  <br>
+  <div><%= f.submit "Обновить учётную запись", class:'button-primary-light-green' %></div>
+  <br>
+  <%= render "devise/shared/links" %>
+  <%= link_to "Назад", :back %>
+<% end %>
+</div>

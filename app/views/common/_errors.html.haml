@@ -1,0 +1,5 @@
+#error_explanation
+	%h2 Были выявлены ошибки (#{object.errors.count}) при заполнении формы :"
+	.error-wrap
+		- object.errors.full_messages.each do |msg|
+			.error= msg

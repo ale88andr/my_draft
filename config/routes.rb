@@ -1,6 +1,27 @@
 MyDraft::Application.routes.draw do
-  get "static_pages/home"
 
+  get "comments/create"
+
+  resources :categories, :tags
+
+  #mount Ckeditor::Engine => '/ckeditor'
+
+  namespace :admin do
+    resources :users
+  end
+
+  resources :articles do
+    # kaminari
+    get 'page/:page', :action => :index, :on => :collection
+    get 'unpublished', :on => :collection
+    get 'option/:option', :action => :index, :on => :collection
+    resources :comments
+  end
+
+  devise_for :users
+
+  get "static_pages/home"
+  get "/about", :to => 'static_pages#about'
   get "static_pages/help"
 
   # The priority is based upon order of creation:
@@ -52,7 +73,8 @@ MyDraft::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  
+  root :to => 'static_pages#home'
 
   # See how all your routes lay out with "rake routes"
 

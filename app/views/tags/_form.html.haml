@@ -1,0 +1,12 @@
+﻿= form_for @tag do |f|
+  - if @tag.errors.any?
+    = render "common/errors", object: @tag
+
+  .field
+    = f.label :name, "Наименование тега :"
+    = f.text_field :name
+    %br
+    %span.input-helper Этот заголовок, будет помещён в описание статьи в качестве тега
+    %br
+  .actions
+    = f.submit 'Сохранить', :class => "button-primary-light-green"

@@ -1,0 +1,6 @@
+.category
+	#{link_to category.name, category_path(category)}, количество статей: #{category.articles.count}
+	- if can? :manage, Category
+		.admin-menu
+			= link_to "Редактировать", edit_category_path(category)
+			= link_to 'Удалить', category, :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить категорию '#{category.name}'?" }

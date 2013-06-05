@@ -1,0 +1,33 @@
+= form_for [:admin, @user] do |f|
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this article from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :username, "Имя пользователя :"
+    = f.text_field :username
+    %br
+  .field
+    = f.label :email, "Email пользователя :"
+    = f.email_field :email
+    %br
+  .field
+    = f.label :user_about, "Информация о пользователе :"
+    = f.text_area :user_about
+    %br
+  .field
+    = f.label "Предоставить или удалить привилегии :"
+    = f.radio_button :role_ids, 1, { :checked => @user.role_ids[0]==1?true:false }
+    Администратор
+    %br
+    = f.radio_button :role_ids, 2, { :checked => @user.role_ids[0]==2?true:false }
+    Модератор
+    %br
+    = f.radio_button :role_ids, 3, { :checked => @user.role_ids[0]==3?true:false }
+    Пользователь
+    %br
+  .actions
+    = f.submit 'Сохранить', class:"button-primary-light-green"

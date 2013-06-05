@@ -1,0 +1,4 @@
+%tags
+	%h1 Перечень доступных тегов
+	- @tags.each do |tag|
+		= link_to tag.name, tag, :class => "tag"

@@ -21,7 +21,7 @@
       %br
       .author
         Автор : 
-        = @article.user.username
+        = link_to @article.user.username, user_path(@article.user.id)
       .name
         %h1= @article.title
       .content

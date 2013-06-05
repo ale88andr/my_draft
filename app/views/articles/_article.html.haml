@@ -8,7 +8,7 @@
     .title
       %h3= link_to article.title, article
     .author
-      = article.user.username
+      = link_to article.user.username, user_path(article.user.id)
     .tag
       = image_tag "img/tag.png", size:"15x15"
       - Tag.find(article.tag_ids).each do |tag|

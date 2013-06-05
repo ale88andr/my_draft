@@ -30,9 +30,7 @@
         <%= render "layouts/header" %>
             <div id="content-wrap">
                 <%= render "common/auth_res" %>
-                <% flash.each do |key,value| %>
-                    <%= content_tag(:span, "Сообщение: #{value}", class: key) %>
-                <% end %>
+                <%= render "common/notice" %>
                 <%= render "admin/link_resorces" if can? :manage, :all %>
                 <%= yield %>
                 <br>

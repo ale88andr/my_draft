@@ -5,7 +5,7 @@
 				= image_tag "/img/default_user_avatar.png" #comment.user.avatar ||
 			.body
 				.username
-					Оставил пользователь : <b>#{comment.user.username}</b>, #{format_date comment.created_at}
+					Оставил пользователь : <b>#{link_to @article.user.username, user_path(@article.user.id)}</b>, #{format_date comment.created_at}
 				%br
 				.content
 					= comment.body

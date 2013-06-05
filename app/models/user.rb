@@ -6,7 +6,7 @@
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable #, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :show_email, :user_birth, :user_country, :user_sex, :user_about, :username, :role_ids
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :show_email, :user_birth, :user_country, :user_sex, :user_about, :username, :role_ids, :avatar, :avatar_cache
 
   has_many :articles
   has_many :comments
@@ -23,6 +23,9 @@
 
   # Scopes
   scope :named, order("username ASC")
+
+  # carrierwave
+  mount_uploader :avatar, AvatarUploader
 
   def role?(role)
     self.roles.find_by_name(role.to_s)

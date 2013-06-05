@@ -2,7 +2,7 @@
   
   belongs_to :user
   belongs_to :article
-  attr_accessible :body, :user_id
+  attr_accessible :body
 
   validates :body, presence:{message:" - Это поле должно быть заполненно"}
 

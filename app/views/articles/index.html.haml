@@ -4,10 +4,10 @@
   .articles-links
     %ul
       %li Статьи :
-      %li= link_to "За сутки | ", articles_path+'/option/tooday'
-      %li= link_to "За неделю | ", articles_path+'/option/week' 
-      %li= link_to "За месяц | ", articles_path+'/option/month'
-      %li= link_to "Наиболее просматриваемые | ", articles_path+'/option/top_views'
+      %li= link_to "За сутки | ", articles_path + '/option/tooday'
+      %li= link_to "За неделю | ", articles_path + '/option/week' 
+      %li= link_to "За месяц | ", articles_path + '/option/month'
+      %li= link_to "Наиболее просматриваемые | ", articles_path + '/option/top_views'
   - if !@articles.empty?
     .paginate= paginate @articles
     = render @articles

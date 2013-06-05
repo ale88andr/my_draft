@@ -1,6 +1,6 @@
 <%= provide(:title, "Редактирование профиля пользователя #{@user.username}") %>
 <div id='register'>
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f| %>
   <%= devise_error_messages! %>
 
   <div class='reg-header'>Редактирование своей учётной записи</div>
@@ -112,6 +112,18 @@
           <span class="field-about">Здесь можно добавить или изменить данные о себе.</span>
         </td>
       </tr>
+       <tr>
+        <td class="field">
+          <fieldset>
+            <label>Аватар</label>
+            <%= f.file_field :avatar %>
+            <%= f.hidden_field :avatar_cache %>
+          </fieldset>
+        </td>
+        <td class="help">
+          <span class="field-about">Выбор изображения пользователя.</span>
+        </td>
+      </tr>
       <tr>
         <td class="field">
           <fieldset>
@@ -125,13 +137,13 @@
       </tr>
     </tbody>
   </table>
-  <br>
-  <div id="registration-footer">
+  <!--<div id="registration-footer">
     <h3>Удаление своей учётной записи</h3>
     <p>Недовольны? <%= button_to "Удалить мою учётную запись", registration_path(resource_name), :data => { :confirm => "Вы уверенны?" }, :method => :delete, :class => 'button-primary-light-red' %></p>
-  </div>
+  </div>-->
   <br>
   <div><%= f.submit "Обновить учётную запись", class:'button-primary-light-green' %></div>
+  <br>
   <br>
   <%= render "devise/shared/links" %>
   <%= link_to "Назад", :back %>

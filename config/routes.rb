@@ -1,5 +1,7 @@
 MyDraft::Application.routes.draw do
 
+  get "users/show"
+
   get "comments/create"
 
   resources :categories, :tags
@@ -19,6 +21,8 @@ MyDraft::Application.routes.draw do
   end
 
   devise_for :users
+
+  resources :users, :only => [:show]
 
   get "static_pages/home"
   get "/about", :to => 'static_pages#about'

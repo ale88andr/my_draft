@@ -5,6 +5,8 @@
   has_many :comments
   has_and_belongs_to_many :tags
 
+  before_save {title.squish.capitalize}
+
   attr_accessible :content, :published, :title, :category_id, :views, :tag_ids
 
   # validations

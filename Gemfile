@@ -21,9 +21,9 @@ gem 'cancan'
 gem 'kaminari'
 
 group :development, :test do 
-	gem 'rspec-rails', '~>2.12.2'
-	gem 'spork'
-	#gem 'annotate'
+  gem 'rspec-rails', '~> 2.12.2'
+  gem 'capybara'
+  #gem 'annotate'
 end
 
 group :assets do
@@ -33,10 +33,10 @@ group :assets do
 end
 
 group :test do
-	gem 'capybara'
-	gem 'factory_girl_rails', '4.1.0'
-	gem 'cucumber-rails'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', '4.1.0'
 end
 
 gem 'jquery-rails'
-gem 'json', '~> 1.7.7'
+gem 'json'

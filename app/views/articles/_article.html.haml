@@ -15,7 +15,7 @@
         = link_to tag.name, tag
         *
     .content
-      = article.content
+      = description_from article.content
     .category
       = link_to article.category.name, category_path(article.category), class:"category"
       = link_to article.views|| 0, article, class:"category"

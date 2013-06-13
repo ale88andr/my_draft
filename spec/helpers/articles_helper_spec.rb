@@ -1,4 +1,4 @@
-require 'spec_helper'
+﻿require 'spec_helper'
 
 # Specs in this file have access to a helper object that includes
 # the ArticlesHelper. For example:
@@ -11,5 +11,13 @@ require 'spec_helper'
 #   end
 # end
 describe ArticlesHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+	describe "Описание статьи" do
+		it "должно содержать не более 304-х символов" do
+			article = Article.new(:content => "a"*1000)
+			content = description_from article.content
+			content.should have_at_most(304).charachters
+		end
+	end
+
 end

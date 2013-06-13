@@ -1,0 +1,13 @@
+Feature: User registration
+	Scenario: Unsuccessfull registration with invalid data
+		Given I am a guest user
+		When I fill in registration form with incorrect data
+		Then I should see an error message
+		And I should see registration form with my incorrect values in the fields
+
+	Scenario: Successfull user registration
+		Given I am a guest user
+		When I fill in registration form with correct data
+		And I click "register" button
+		Then I should redirect on home page
+		And I should see welcome message 

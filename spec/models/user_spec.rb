@@ -2,7 +2,33 @@
 
 describe User do
 
-  describe "Регистрация" do
+  describe "User model" do
+
+	let(:user) {User.new}
+
+	it "User is an ActiveRecord model" do
+		expect(User.superclass).to eq(ActiveRecord::Base)
+	end
+	
+	it "has email" do
+		user.email = "example@email.com"
+		expect(user.email).to eq("example@email.com")
+	end
+	it "responds to username" do
+		user.password = "pass"
+		expect(user.password).to eq("pass")
+	end
+	it "responds to password" do
+		user.password = "pass"
+		expect(user.password).to eq("pass")
+	end
+	it "responds to password_confirmation" do
+		user.password_confirmation = "pass"
+		expect(user.password_confirmation).to eq("pass")
+	end
+  end
+
+  describe "Валидации" do
 	  before {@user = User.new(username:"ale88andr", email:"ale88andr_example@gmail.com", password:"11111111", password_confirmation:"11111111")}
 
 	  subject {@user}
@@ -67,7 +93,7 @@ describe User do
 
 	  describe "Валидация равенства паролей" do
 	  	before {@user.password_confirmation = 'mismatch'}
-	  	it {should_not be_valid}
+	  	it {should_not be_save}
 	  end
 
 	  #describe "Валидация равенства полей 'password' и 'password_confirmation'" do

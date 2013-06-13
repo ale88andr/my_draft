@@ -40,7 +40,7 @@ When /^I fill in registration form with correct data$/ do
 end
 
 And /^I click "register" button$/ do
-	expect { click_button "Присоединиться" }.to change(User, :count).by(1)
+	expect{click_button "Присоединиться"}.to change(User, :count).by(1)
 end
 
 Then /^I should redirect on home page$/ do

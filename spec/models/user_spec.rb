@@ -2,9 +2,15 @@
 
 describe User do
 
-  describe "User model" do
-
 	let(:user) {User.new}
+
+	subject {user}
+
+	it {should respond_to :username}
+	it {should respond_to :email}
+	it {should respond_to :password}
+	it {should respond_to :password_confirmation}
+	it {should respond_to :password_digest}
 
 	it "User is an ActiveRecord model" do
 		expect(User.superclass).to eq(ActiveRecord::Base)
@@ -14,94 +20,152 @@ describe User do
 		user.email = "example@email.com"
 		expect(user.email).to eq("example@email.com")
 	end
+
 	it "responds to username" do
-		user.password = "pass"
-		expect(user.password).to eq("pass")
+		user.username = "user123"
+		expect(user.username).to eq("user123")
 	end
+
 	it "responds to password" do
 		user.password = "pass"
 		expect(user.password).to eq("pass")
 	end
+
 	it "responds to password_confirmation" do
 		user.password_confirmation = "pass"
 		expect(user.password_confirmation).to eq("pass")
 	end
-  end
 
-  describe "Валидации" do
-	  before {@user = User.new(username:"ale88andr", email:"ale88andr_example@gmail.com", password:"11111111", password_confirmation:"11111111")}
+	describe "association" do
 
-	  subject {@user}
+		context "to article model" do
 
-	  it {should respond_to :username}
-	  it {should respond_to :email}
-	  it {should respond_to :password}
-	  it {should respond_to :password_confirmation}
-	  it {should respond_to :password_digest}
+			it "should associate with article model" do
+				assoc = User.reflect_on_association(:articles)
+				assoc.macro.should == :has_many
+			end
 
-	  it {should be_valid}
+		end
 
-	  describe "Валидация заполнения поля 'username'" do
-	  	before {@user.username = ''}
-	  	it {should_not be_valid}
-	  end
+		context "to comment model" do
 
-	  describe "Валидация длинны поля 'username'" do
-	  	before {@user.username = 'w' * 51}
-	  	it {should_not be_valid}
-	  end
+			it "should associate with comment model" do
+				assoc = User.reflect_on_association(:comments)
+				assoc.macro.should == :has_many
+			end
 
-	  describe "Уникальность поля 'username'" do
-	  	before {@user.username = 'oQo'}
-	  	it {should_not be_valid}
-	  end
+		end
 
-	  describe "Валидация заполнения поля 'email'" do
-	  	before {@user.email = ''}
-	  	it {should_not be_valid}
-	  end
+	end	
 
-	  describe "Валидация поля 'email' по шаблону" do
-	  	before {@user.email = "user@foo,com"}
-	  	it {should_not be_valid}
-	  	#addresses = %w[user@foo,com user_at_foo.com example.user@foo. foo@bar_vbaz.com foo@bar+baz.com]
-	  	#addresses.each do |addr|
-	  		#it {email = addr}
-	  		#it {should_not be_valid}
-	  	#end
-	  end
+	describe "user model validation" do
+		
+		before :each do
+			@params = {
+				username: 				"example",
+				email: 					"example@example.com",
+				password: 				"secret_password",
+				password_confirmation: 	"secret_password"
+			}
+		end
 
-	  describe "Правильное заполнение поля 'email'" do
-	  	before {@user.email = 'ale88andr1@gmail.com'}
-	  	it {should be_valid}
-	  end
+		describe "with wrong input data" do
 
-	  describe "Уникальность поля 'email'" do
-	  	before {@user.email = 'ale88andr@gmail.com'}
-	  	it {should_not be_valid}
-	  end
+			after :each do
+				user = User.new(@params)
+				expect(user).to_not be_valid
+			end
 
-	  describe "Валидация заполнения поля 'password'" do
-	  	before {@user.password = @user.password_confirmation = ''}
-	  	it {should_not be_valid}
-	  end
+			context "email validation" do
 
-	  describe "Валидация ограничения на минимум поля 'password'" do
-	  	before {@user.password = @user.password_confirmation = 'q' * 6}
-	  	it {should_not be_valid}
-	  end
+				it "is invalid when email is empty" do
+					@params[:email] = nil
+				end
 
-	  describe "Валидация равенства паролей" do
-	  	before {@user.password_confirmation = 'mismatch'}
-	  	it {should_not be_save}
-	  end
+				it "is invalid when email has wrong format" do
+					addresses = %w[user@foo,com user_at_foo.com example.user@foo. foo@bar_vbaz.com foo@bar+baz.com]
+					addresses.each do |addr|
+						@params[:email] = addr
+						user = User.new(@params)
+						expect(user).to_not be_valid
+					end
+				end
 
-	  #describe "Валидация равенства полей 'password' и 'password_confirmation'" do
-	  	#before {@user.password = 'Pa$$w0rd'}
-	  	#before {@user.password_confirmation = 'Pa$$w0rd1'}
-	  	#it {should_not be_save}
-	  #end
+				it "email uniqueness" do
+					User.create(@params)
+				end
+				
+			end
 
-  end
+			context "username validation" do
+
+				it "is invalid when username is empty" do
+					@params[:username] = nil
+				end
+
+				it "is invalid when username length too long" do
+					@params[:username] = 'a' * 51
+				end
+
+				it "username uniqueness" do
+					User.create(@params)
+				end
+
+			end
+
+			context "password validation" do
+
+				it "is invalid when password is empty" do
+					@params[:password] = nil
+				end
+
+				it "is invalid when password length too short" do
+					@params[:password] = @params[:password_confirmation] = '1' * 6
+				end
+
+				it "is invalid when password not equal password_confirmation" do
+					@params[:password_confirmation] = 'another_secret_password'
+				end
+
+			end
+
+		end
+
+		describe "with valid input data" do
+
+			# after :each do
+			# 	user = User.new(@params)
+			# 	expect(user).to be_valid
+			# end
+
+			context "email validation" do
+
+				it "with valid format" do
+					addresses = %w[user@foo.com user_at_foo@mail.com foo123@gmail.com]
+					addresses.each do |addr|
+						@params[:email] = addr
+						user = User.new(@params)
+						expect(user).to be_valid
+					end
+				end
+
+			end
+
+			context "username validation" do
+
+				it "with valid values" do
+					usernames = %w[example@user 123user user123 I'm_valid_user]
+					usernames.each do |username|
+						@params[:username] = username
+						user = User.new(@params)
+						expect(user).to be_valid
+					end
+				end
+
+			end
+
+		end
+
+	end
 
 end

@@ -31,12 +31,21 @@ describe ArticlesController do
 
   describe "GET new" do
 
+    let!(:article) { stub_model(Article) }
+    before :each do
+      Article.stub(:new).and_return(article)
+    end
+
     it "sends new article to Article class" do
-      params = {
-        "title" => "NewArticleTitle",
-        "content" => "NewArticleContent"
-      }
-      Article.should_receive(:new).with(params)
+      #pending()
+      Article.stub_chain(:current_user, :articles).and_return(article)
+      Article.stub(:new).and_return(article)
+      Article.current_user.articles.should_receive(:new).with(valid_attributes)
+    end
+
+    it "sends save message to a Reader model" do
+      article.should_receive(:save)
+      post :create
     end
 
   end

@@ -18,7 +18,7 @@
   validates :username, uniqueness:{case_sensitive:false, message:" - В нашей базе уже есть такое имя, придумайте пожалуйсто другое!"}, presence:{message:" - Это поле должно быть заполненно!"}, length:{maximum:50, too_long:" - Слишком длинное имя, Вам следует придумать что-нибудь покороче"}
   VALID_EMAIL_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, uniqueness:{case_sensitive:false, message:" - В нашей базе уже есть такой email, используйте другой электронный адрес!"}, presence:{message:" - Это поле должно быть заполненно!"}, format:{with:VALID_EMAIL_FORMAT, message:" - Это поле должно иметь следующий формат: examle@mail.com"}
-  validates :password, length:{minimum:8, too_short:" - Должен состоять не менее чем из 8 символов"}, on: :create
+  validates :password, length:{minimum:8, too_short:" - Должен состоять не менее чем из 8 символов"}, on: :create, confirmation: true
   validates :password_confirmation, length:{minimum:8, too_short:" - Должен состоять не менее чем из 8 символов"}, on: :create
 
   # Scopes

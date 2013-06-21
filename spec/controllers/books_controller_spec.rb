@@ -1,4 +1,4 @@
-require 'spec_helper'
+﻿require 'spec_helper'
 
 describe BooksController do
 
@@ -56,6 +56,44 @@ describe BooksController do
 			book.should_receive(:save)
 			post :create
 		end
+
+		context "Send save to a model and return true" do
+
+			before(:each) do
+				book.stub(:save).and_return(true)
+				post :create, book: params
+			end
+
+			it "redirect to view a books list" do
+				expect(response).to redirect_to books_path
+			end
+
+			it "assigns a success flash message" do
+				expect(flash[:notice]).not_to be_nil
+			end
+
+		end#Send save to a model return true
+
+		context "Send save to a model and return false" do
+
+			before(:each) do
+				book.stub(:save).and_return(false)
+				post :create, book: params
+			end
+
+			it "redirect to view a new book" do
+				expect(response).to render_template :new
+			end
+
+			it "assign @book to a view" do
+				expect(assigns[:book]).to eq(book)
+			end
+
+			it "assigns a success flash message" do
+				expect(flash.now[:error]).not_to be_nil
+			end
+
+		end#Send save to a model return false
 
 	end#POST 'create'
 

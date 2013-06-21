@@ -1,4 +1,4 @@
-class BooksController < ApplicationController
+﻿class BooksController < ApplicationController
 
 	def index
 
@@ -10,8 +10,12 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(params[:book])
-    @book.save
-    render nothing: true
+    if @book.save
+      redirect_to books_path, notice: "Книга была успешно добавленна"
+    else
+      flash.now[:error] = "Ошибка заполнения формы"
+      render 'new'
+    end
   end
 
 end

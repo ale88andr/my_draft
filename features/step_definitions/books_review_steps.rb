@@ -50,7 +50,7 @@ And /^I filing the form with valid data$/ do
 end
 
 And /^I click save button$/ do
-  expect(find_button('Сохранить').click).to change(Book, :count).by(1)
+  expect{click_button 'Сохранить'}.to change(Book, :count).by(1)
 end
 
 Then /^New Book must be added to books$/ do

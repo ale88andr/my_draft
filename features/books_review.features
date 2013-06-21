@@ -13,7 +13,7 @@ Feature: Review books and it's summary
 		When I click on the single book
 		Then I should see review of book
 
-	Scenario: Adding a book
+	Scenario: Adding a book with valid data
 		Given I am a admin user
 		And I visit books page
 		And I should see a new book link and click it
@@ -22,5 +22,15 @@ Feature: Review books and it's summary
 		And I click save button
 		Then New Book must be added to books
 		And I should see that new book
+
+	Scenario: Adding a book with invalid data
+		Given I am a admin user
+		And I visit books page
+		And I should see a new book link and click it
+		And I should see a form which contains fields to create new book resourse item
+		When I filing the form with invalid data
+		And I click save button with invalid data
+		Then New Book must not be added to books
+		And I should see form new book again
 
 	Scenario: Deleting single book

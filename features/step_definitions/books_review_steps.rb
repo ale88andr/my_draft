@@ -54,12 +54,35 @@ And /^I click save button$/ do
 end
 
 Then /^New Book must be added to books$/ do
-  expect(Book.find_by_title('title')).should_not be_nil
+  expect(Book.find_by_title('title')).to_not be_nil
 end
 
 And /^I should see that new book$/ do
   #current_path.should ==
 end
 
+When /^I filing the form with invalid data$/ do
+  visit new_book_path
+  within('#new_book') do
+    fill_in "book_title",             with: ''
+    fill_in "book_author",            with: ''
+    fill_in "book_year",              with: 'One thousand nine hundred'
+    fill_in "book_description",       with: ''
+    fill_in "book_publisher",         with: ''
+    fill_in "book_language",          with: ''
+    fill_in "book_number_of_pages",   with: 'one'
+    fill_in "book_ISBN10",            with: 'ten one'
+    fill_in "book_ISBN13",            with: '13 X one'
+    fill_in "book_link_to_book",      with: 'some.book.com'
+    fill_in "book_category_of_book",  with: 'one'
+    #attach_file('book_book_img', '/path/to/image.jpg')
+  end
+end
 
+And /^I click save button with invalid data$/ do
+  expect{click_button 'Сохранить'}.to change(Book, :count).by(0)
+end
 
+Then /^New Book must not be added to books$/ do
+  expect(Book.find_by_title('title')).to be_nil
+end

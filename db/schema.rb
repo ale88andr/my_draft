@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130605115441) do
+ActiveRecord::Schema.define(:version => 20130621160827) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -34,6 +34,26 @@ ActiveRecord::Schema.define(:version => 20130605115441) do
 
   add_index "articles_tags", ["article_id"], :name => "index_articles_tags_on_article_id"
   add_index "articles_tags", ["tag_id"], :name => "index_articles_tags_on_tag_id"
+
+  create_table "books", :force => true do |t|
+    t.string   "title"
+    t.string   "author"
+    t.integer  "year"
+    t.text     "description"
+    t.string   "publisher"
+    t.string   "language"
+    t.integer  "number_of_pages"
+    t.integer  "ISBN10"
+    t.integer  "ISBN13"
+    t.string   "link_to_book"
+    t.integer  "category_of_book"
+    t.string   "book_img"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "books", ["author"], :name => "index_books_on_author"
+  add_index "books", ["title"], :name => "index_books_on_title"
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -91,7 +111,7 @@ ActiveRecord::Schema.define(:version => 20130605115441) do
     t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "username",                                  :null => false
     t.boolean  "show_email",             :default => false, :null => false
-    t.string   "user_birth"
+    t.date     "user_birth"
     t.string   "user_country"
     t.integer  "user_sex"
     t.text     "user_about"

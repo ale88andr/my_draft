@@ -4,7 +4,7 @@ MyDraft::Application.routes.draw do
 
   get "comments/create"
 
-  resources :categories, :tags
+  resources :categories, :tags, :books
 
   #mount Ckeditor::Engine => '/ckeditor'
 

@@ -9,7 +9,7 @@ Feature: Signing in
 	Scenario: Successful signin 
 		Given I am a Guest user
 		And I visits the signin page
-		And I a user which have an account 
+		And I am user which have an account 
 		When I submits valid signin information
 		And I click to Signin button
 		Then I redirected to home page and should see my name, profile link and signout link

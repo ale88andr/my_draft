@@ -11,7 +11,8 @@
     if @tag.save
       redirect_to @tag, notice: "Тег успешно созданн"
     else
-      render "new", notice: "Не удалось создать тег"
+      flash[:error] = "Не удалось создать тег"
+      render "new"
     end
   end
 

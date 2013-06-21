@@ -1,0 +1,54 @@
+﻿- if @book.errors.any?
+	= render 'common/errors', object:@book
+= form_for @book do |f|
+	.field
+		= f.label :title, "Название книги"
+		= f.text_field :title
+		%br
+	.field
+		= f.label :author, "Автор(ы) книги"
+		= f.text_field :author
+		%br
+	.field
+		= f.label :description, "Описание книги"
+		= f.text_area :description
+		%br
+	.field
+		= f.label :year, "Год издания"
+		= f.text_field :year
+		%br
+	.field
+		= f.label :publisher, "Издательство"
+		= f.text_field :publisher
+		%br
+	.field
+		= f.label :language, "Язык на котором написанна книга"
+		= f.text_field :language
+		%br
+	.field
+		= f.label :number_of_pages, "Количество страниц"
+		= f.text_field :number_of_pages
+		%br
+	.field
+		= f.label :ISBN10, "ISBN-10"
+		= f.text_field :ISBN10
+		%br
+	.field
+		= f.label :ISBN13, "ISBN-13"
+		= f.text_field :ISBN13
+		%br
+	.field
+		= f.label :link_to_book, "Ссылка на подробное описание"
+		= f.text_field :link_to_book
+		%br
+	.field
+		= f.label :category_of_book, "Категория к которой относится данная книга"
+		= f.text_field :category_of_book
+		%br
+	.field
+		= f.label :book_img, "Изображение книги"
+		= f.file_field :book_img
+		= #f.hidden_field :book_img_cashe
+		%br
+	.actions
+		= f.submit 'Сохранить', :class => "button-primary-light-green"

@@ -2,18 +2,6 @@
 
 describe ArticlesController do
 
-  def valid_attributes
-    { 
-      "id" => 1001,
-      "title" => "MyNewArticleTitle",
-      "content" => "MyNewArticleContent",
-      "category_id" => 1,
-      "user_id" => 1,
-      "created_at" => '2013-05-21 11:58:56.820779',
-      "updated_at" => '2013-05-21 11:58:56.820779'
-    }
-  end
-
   describe "GET index" do
 
     let!(:articles) {Article.all}
@@ -29,24 +17,39 @@ describe ArticlesController do
 
   end
 
-  describe "GET new" do
+  describe "POST 'create'" do
 
-    let!(:article) { stub_model(Article) }
+    let!(:article) { stub_model(Article).as_new_record }
+    let!(:params) do
+      {
+        "title" => "MyNewArticleTitle",
+        "content" => "MyNewArticleContent",
+        "category_id" => '1',
+      }
+    end
+
     before :each do
       Article.stub(:new).and_return(article)
     end
 
     it "sends new article to Article class" do
-      #pending()
-      Article.stub_chain(:current_user, :articles).and_return(article)
-      Article.stub(:new).and_return(article)
-      Article.current_user.articles.should_receive(:new).with(valid_attributes)
+      Article.should_receive(:new).with(params)
+      post :create, article: params
     end
 
-    it "sends save message to a Reader model" do
-      article.should_receive(:save)
-      post :create
-    end
+    context "When save message return true" do
+        before :each do
+          article.stub(:save).and_return(true)
+        end
+        it "redirects to root url" do
+          post :create, article: params
+          expect(response).to redirect_to root_url
+        end
+        it "assigns a success flash message" do
+          post :create, article: params
+          expect(flash[:notice]).not_to be_nil
+        end
+      end
 
   end
 

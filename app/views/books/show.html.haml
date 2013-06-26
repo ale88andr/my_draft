@@ -1,0 +1,13 @@
+#book-show
+	= @book.title
+	= @book.author
+	= @book.description ||= 'Нет данных'
+	= @book.year
+	= @book.publisher ||= 'Нет данных'
+	= @book.language ||= 'Нет данных'
+	= @book.number_of_pages ||= 'Нет данных'
+	= @book.ISBN10 ||= 'Не указан'
+	= @book.ISBN13 ||= 'Не указан'
+	= link_to @book.link_to_book ||= 'Временно отсутствует', @book.link_to_book ||= ''
+	= @book.category_of_book
+	= @book.book_img

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130621160827) do
+ActiveRecord::Schema.define(:version => 20130625123653) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20130621160827) do
   create_table "books", :force => true do |t|
     t.string   "title"
     t.string   "author"
-    t.integer  "year"
     t.text     "description"
+    t.integer  "year"
     t.string   "publisher"
     t.string   "language"
     t.integer  "number_of_pages"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20130621160827) do
     t.datetime "updated_at",       :null => false
   end
 
-  add_index "books", ["author"], :name => "index_books_on_author"
+  add_index "books", ["category_of_book"], :name => "index_books_on_category_of_book"
   add_index "books", ["title"], :name => "index_books_on_title"
 
   create_table "categories", :force => true do |t|

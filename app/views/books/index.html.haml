@@ -1,3 +1,5 @@
 #books-list
-	Ни одной книги пока не добавленно!
-= link_to "Добавить книгу", new_book_path
+	- if @books.exists?
+		= render @books
+	- else
+		Ни одной книги пока не добавленно!

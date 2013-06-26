@@ -39,7 +39,7 @@ describe "books/new.html.haml" do
 		end
 
 		it "form with id new_book has book numbers_of_pages" do
-			expect(rendered).should have_selector('#book_numbers_of_pages')
+			expect(rendered).should have_selector('#book_number_of_pages')
 		end
 
 		it "form with id new_book has book ISBN10" do

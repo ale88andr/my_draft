@@ -32,7 +32,7 @@ describe Comment do
 
 		end
 
-	end
+	end#association
 
 	describe "comment validations" do
 
@@ -67,6 +67,6 @@ describe Comment do
 
 		end
 
-	end
+	end#comment validations
 
-end
+end#Comment

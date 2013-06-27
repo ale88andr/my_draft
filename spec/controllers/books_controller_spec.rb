@@ -187,8 +187,88 @@ describe BooksController do
 
 	describe "PUT 'update'" do
 
+		@params = {
+			title: 		"title",
+			author: 	"author",
+			year: 		2010,
+			publisher: 	"publisher",
+			link_to_book: "http://www.book.ru/book/1"
+		}
 
+		let!(:book) { stub_model(Book, id: 1) }
+		before :each do
+			Book.stub(:find).and_return(book)
+		end
+
+		it "should receive find message" do
+			Book.should_receive(:find)
+			put :update, id: book.id, book: @params
+		end
+
+		it "should receive update attributes message" do
+			book.should_receive(:update_attributes)
+			put :update, id: book.id, book: @params
+		end
+
+		context "when update_attributes return true" do
+
+			before :each do
+				book.stub(:update_attributes).and_return(true)
+				put :update, id: 1, book: @params
+			end
+
+			it "should redirects to books index" do
+				expect(response).to redirect_to books_path
+			end
+
+			it "should flash notice" do
+				expect(flash[:notice]).not_to be_nil
+			end
+
+		end#when update_attributes return true
+
+		context "when update_attributes return false" do
+
+			before :each do
+				Book.stub(:update_attributes).and_return(false)
+				put :update, id: 1, book: @params
+			end
+
+			it "should render edit view" do
+				expect(response).to render_template :edit
+			end
+
+			it "should assigns @book variable" do
+				expect(assigns[:book]).to eq(book)
+			end
+
+			it "should exists flash error message" do
+				expect(flash[:error]).not_to be_nil
+			end
+
+		end#when update_attributes return false
 
 	end#PUT 'update'
+
+	describe "DELETE 'destroy'" do
+
+		let!(:book) { stub_model(Book, id: 1) }
+
+		before :each do
+			Book.stub(:find).and_return(book)
+			book.stub(:destroy).and_return(true)
+		end
+
+		it "sends find message to Book" do
+			Book.should_receive(:find)
+			delete :destroy, id: book.id
+		end
+
+		it "redirects to books index page" do
+			delete :destroy, id: book.id
+			expect(response).to redirect_to books_path
+		end
+
+	end#DELETE 'destroy'
 
 end

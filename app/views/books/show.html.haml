@@ -11,3 +11,7 @@
 	= link_to @book.link_to_book ||= 'Временно отсутствует', @book.link_to_book ||= ''
 	= @book.category_of_book
 	= @book.book_img
+
+#book-manage
+	= link_to "Редактировать", edit_book_path(@book)
+	= link_to "Удальть", book_path(@book), :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить книгу '#{@book.title}'" }

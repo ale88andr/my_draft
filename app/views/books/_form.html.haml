@@ -3,23 +3,23 @@
 = form_for @book do |f|
 	.field
 		= f.label :title, "Название книги"
-		= f.text_field :title
+		= f.text_field :title, placeholder:"Название книги"
 		%br
 	.field
 		= f.label :author, "Автор(ы) книги"
-		= f.text_field :author
+		= f.text_field :author, placeholder:"Автор книги"
 		%br
 	.field
 		= f.label :description, "Описание книги"
-		= f.text_area :description
+		= f.text_area :description, placeholder:"Описание книги"
 		%br
 	.field
 		= f.label :year, "Год издания"
-		= f.text_field :year
+		= f.text_field :year, placeholder:"Год публикации издания"
 		%br
 	.field
 		= f.label :publisher, "Издательство"
-		= f.text_field :publisher
+		= f.text_field :publisher, placeholder:"Издательство"
 		%br
 	.field
 		= f.label :language, "Язык на котором написанна книга"
@@ -27,19 +27,19 @@
 		%br
 	.field
 		= f.label :number_of_pages, "Количество страниц"
-		= f.text_field :number_of_pages
+		= f.text_field :number_of_pages, placeholder:"Кол-во страниц"
 		%br
 	.field
 		= f.label :ISBN10, "ISBN-10"
-		= f.text_field :ISBN10
+		= f.text_field :ISBN10, placeholder:"ISBN-10 книги"
 		%br
 	.field
 		= f.label :ISBN13, "ISBN-13"
-		= f.text_field :ISBN13
+		= f.text_field :ISBN13, placeholder:"ISBN-13 книги"
 		%br
 	.field
 		= f.label :link_to_book, "Ссылка на подробное описание"
-		= f.text_field :link_to_book
+		= f.text_field :link_to_book, placeholder:"URL книги"
 		%br
 	.field
 		= f.label :category_of_book, "Категория к которой относится данная книга"
@@ -51,4 +51,4 @@
 		= #f.hidden_field :book_img_cashe
 		%br
 	.actions
-		= f.submit 'Сохранить', :class => "button-primary-light-green"
+		= f.submit 'Сохранить', class: "btn btn-primary"

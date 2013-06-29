@@ -14,4 +14,4 @@
 
 #book-manage
 	= link_to "Редактировать", edit_book_path(@book)
-	= link_to "Удальть", book_path(@book), :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить книгу '#{@book.title}'" }
+	= link_to "Удалить", book_path(@book), :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить книгу '#{@book.title}'" }

@@ -26,11 +26,13 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-        
+
         <%= render "layouts/header" %>
             <div id="content-wrap">
                 <%= render "common/auth_res" %>
+                <br>
                 <%= render "common/notice" %>
+                <br>
                 <%= render "admin/link_resorces" if can? :manage, :all %>
                 <%= yield %>
                 <br>
@@ -38,6 +40,6 @@
             </div>
         </div>
         <%= render "layouts/footer" %>
-        <%= debug(params) if Rails.env.development? %>		
+        <%= debug(params) if Rails.env.development? %>
     </body>
 </html>

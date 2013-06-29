@@ -330,44 +330,6 @@ h1 {
       margin: auto;
     }
 
-    /* Кнопки */
-
-    .button-primary-light-green {
-        color: #fff;
-        background: #96bf48;
-        border: 1px solid #8bb43f;
-        text-shadow: 0 1px 0 #80a53a;
-        border-radius: 1px;
-        cursor: pointer;
-        display: inline-block;
-        border-radius: 1px;
-        padding: 7px 15px;
-    }
-
-    .button-primary-light-blue {
-        color: #fff;
-        background: #04a4cc;
-        border: 1px solid #0d8fba;
-        text-shadow: 0 1px 0 #6eb0c6;
-        border-radius: 1px;
-        cursor: pointer;
-        display: inline-block;
-        border-radius: 1px;
-        padding: 7px 15px;
-    }
-
-    .button-primary-light-red {
-        color: #fff;
-        background: #c76b5c;
-        border: 1px solid #b9321c;
-        text-shadow: 0 1px 0 #b9321c;
-        border-radius: 1px;
-        cursor: pointer;
-        display: inline-block;
-        border-radius: 1px;
-        padding: 7px 15px;
-    }
-
     .view {
         position: relative;
         top: -1px;
@@ -402,26 +364,6 @@ h1 {
         color: #678889;
         text-shadow: 1px 1px 0 rgba(256,256,256,1.0);
     }
-
-    /*#sign_in input[type=password], input[type=email], input[type=text]{
-        border: 0;
-        border-bottom: 1px solid #CCC;
-        background-color: transparent;
-        box-shadow: none;
-        line-height: 22px;
-        font-size: 15px;
-        width: 90%;
-        color: #7f7f7f;
-        height: auto;
-        border-radius: 2px;
-        letter-spacing: normal;
-        word-spacing: normal;
-        text-indent: 0px;
-        text-shadow: none;
-        display: inline-block;
-        text-align: start;
-        padding: 15px;
-    }*/
 
     .new_user a:hover {
         text-decoration: underline;
@@ -516,29 +458,6 @@ h1 {
         color: #C2C2C2;
         font-size: 13px;
     }
-
-/* ==========================================================================
-   Other
-   ========================================================================== */
-
-   span.alert {
-        color: #fff;
-        background-color: #f38670;
-        padding: 10px;
-   }
-
-   span.notice {
-        color: #fff;
-        background-color: #7cb3e6;
-        padding: 10px;
-   }
-
-   span.error {
-        color: #f38670;
-        background-color: #fff;
-        border: 1px solid #f38670;
-        padding: 10px;
-   }
 
 
 /* ==========================================================================

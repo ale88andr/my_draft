@@ -128,87 +128,6 @@ h1 {
    Author's custom styles
    ========================================================================== */
 
-   /* Верхний статичный блок */
-
-    #top-block {
-        background: #1e8cbe;
-        width: 100%;
-        height: 70px;
-        z-index: 999;
-        display: block;
-    }
-
-    #top-block-content {
-        margin: 0 auto;
-        width: 1020px;
-    }
-
-    #branding {
-        margin: 0 15px;
-        width: 225px;
-        float: left;
-    }
-
-    span#branding {
-        display: block;
-        float: left;
-        width: 156px;
-        height: 37px;
-        margin: 17px 0 0 -3px;
-        background: url() top left no-repeat;
-        text-indent: -9999px;
-    }
-
-    #logo {
-        float: left;
-        margin-right: 10px;
-        font-size: 1.7em;
-        color: #fff;
-        text-transform: uppercase;
-        letter-spacing: -1px;
-        padding-top: 19px;
-        font-weight: bold;
-        line-height: 1;
-    }
-
-    #navigation {
-        width: 735px;
-        margin: 0 15px;
-        float: left;
-    }
-
-    #menu {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        line-height: 1.0;
-    }
-
-    #navigation nav > ul {
-        float: right;
-        font-size: 13px;
-        text-transform: uppercase;
-    }
-
-    #navigation #menu li {
-        float: left;
-        position: relative;
-    }
-
-    #navigation #menu a {
-        height: 12px;
-        padding: 19px 18px 29px;
-        margin-top: 10px;
-        text-decoration: none;
-        color: #eee;
-        display: block;
-        position: relative;
-    }
-
-    #navigation #menu a:hover {
-        color: #000;
-    }
-
     /* Блок с опциями */
 
     #features {
@@ -289,57 +208,6 @@ h1 {
         width: 260px;
         text-align: right;
         color: #333;
-    }
-
-    /* Блок с футером */
-
-    footer {
-      border-top: 1px solid #eaeaea;
-      color: #999;
-      position: relative;
-      margin-top: -2.5em;
-      height: 2.4em;
-    }
-
-    footer a {
-      color: #555;
-    }
-
-    footer a:hover {
-      color: #222;
-    }
-
-    footer small {
-      float: left;
-      margin: 10px;
-    }
-
-    footer ul {
-      float: right;
-      list-style: none;
-      margin: 10px;
-    }
-
-    footer ul li {
-      float: left;
-      margin-left: 10px;
-    }
-
-    #footer-wrap {
-      width: 1020px;
-      margin: auto;
-    }
-
-    .view {
-        position: relative;
-        top: -1px;
-        margin: 0 0 0 5px;
-        padding: 1px 5px 2px 5px;
-        font-size: 13px;
-        font-weight: bold;
-        color: #666;
-        background: #e5e5e5;
-        border-radius: 10px;
     }
 
     /* Авторизация */
@@ -528,37 +396,6 @@ h1 {
 
 .invisible {
     visibility: hidden;
-}
-
-/*
- * Clearfix: contain floats
- *
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *    `contenteditable` attribute is included anywhere else in the document.
- *    Otherwise it causes space to appear at the top and bottom of elements
- *    that receive the `clearfix` class.
- * 2. The use of `table` rather than `block` is only necessary if using
- *    `:before` to contain the top-margins of child elements.
- */
-
-.clearfix:before,
-.clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
-
-.clearfix:after {
-    clear: both;
-}
-
-/*
- * For IE 6/7 only
- * Include this rule to trigger hasLayout and contain floats.
- */
-
-.clearfix {
-    *zoom: 1;
 }
 
 /* ==========================================================================

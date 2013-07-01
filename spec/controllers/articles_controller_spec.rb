@@ -2,20 +2,25 @@
 
 describe ArticlesController do
 
+  before :each do
+
+  end
+
   describe "GET index" do
 
-    let!(:articles) {Article.all}
+    let!(:articles) { stub_model(Article) }
 
     it "assigns @articles variable to the view" do
       get :index
-      expect(assigns[:articles]).to eq(articles)
+      expect(assigns[:articles]).to eq([])
     end
+
     it "render index template" do
       get :index
       expect(response).to render_template :index
     end
 
-  end
+  end#GET index
 
   describe "POST 'create'" do
 
@@ -51,6 +56,6 @@ describe ArticlesController do
         end
       end
 
-  end
+  end#POST 'create'
 
 end

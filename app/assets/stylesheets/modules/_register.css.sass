@@ -1,0 +1,68 @@
+#register
+
+  :width 1020px
+  :margin auto
+  :padding
+    :top 15px
+
+  .reg-header
+    @include _border(#dfdfdf)
+    :background $f9
+    :color $_txt_default
+    :font
+      :size 1.8em
+    :padding 10px
+
+  tbody
+    :display table-row-group
+    :vertical-align middle
+
+  tr
+    :border-bottom 8px solid $std_white
+    :display table-row
+    :vertical-align inherit
+
+  td.field
+    :width 700px
+    :background #f1f1f1
+    :font
+      :size $base-font-size + 3
+    :position relative
+    :padding 13px
+
+  td.help
+    :background $f9
+    :text-shadow 0px 1px 0px $std_white
+    :position relative
+    :width 295px
+    :vertical-align top
+    :font
+      :size $base-font-size
+    :padding 13px
+    :color #666
+
+  td.field input[type=password], input[type=email], input[type=text], textarea
+    :width 675px
+    :font
+      :size $base-font-size * 2
+    :height 50px
+    :padding 4px 4px 4px 10px
+    @include _border(#c6d9e9)
+
+  td select
+    :width 30%
+    :color $_txt_default
+    :font
+      :size $base-font-size + 5
+      :weight lighter
+    :padding 5px
+
+  td textarea
+    :font
+      :size $base-font-size + 7
+    :height 200px
+
+  td label
+    :color #444
+    :margin
+      :bottom 10px

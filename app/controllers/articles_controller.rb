@@ -33,7 +33,8 @@
       redirect_to @article, notice: "Статья была успешно созданна."
     else
       getCategories
-      render "edit"
+      flash[:error] = "При создании новой статьи возникли ошибки"
+      render "new"
     end
   end
 

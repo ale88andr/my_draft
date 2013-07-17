@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require_tree .
 //= #require ckeditor/init
+
+tinymce.init({
+  selector: "textarea"
+});

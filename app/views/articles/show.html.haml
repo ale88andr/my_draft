@@ -2,17 +2,17 @@
 %p#notice= notice
 
 #article-show
-  %span.title 
+  %span.title
     = @article.title
   .body
     .date
       .published
-        Опубликованно : 
+        Опубликованно :
         %span.day= @article.created_at.day
         %span.month= @article.created_at.strftime("%b")
         %span.year= @article.created_at.year
       .changed
-        Последний раз смотрели : 
+        Последний раз смотрели :
         = time_ago_in_words @article.updated_at
     .t
       .category
@@ -20,18 +20,18 @@
       %br
       %br
       .author
-        Автор : 
+        Автор :
         = link_to @article.user.username, user_path(@article.user.id)
       .name
         %h1= @article.title
       .content
-        = @article.content
+        = raw @article.content
       %br
       .tags
         - Tag.find(@article.tag_ids).each do |tag|
           = link_to tag.name, tag, class:"tags"
       .views
-        Просмотров : 
+        Просмотров :
         %span.view= @article.views|| 0
       %br
       %br
@@ -53,13 +53,13 @@
       -if can? :create, Comment
         = render 'comments/comment_form'
       -else
-        Вы не можете оставлять комментарии, #{link_to "Войдите", new_user_session_path} под своим именем или #{link_to "Зарегистрируйтесь", new_user_registration_path} 
+        Вы не можете оставлять комментарии, #{link_to "Войдите", new_user_session_path} под своим именем или #{link_to "Зарегистрируйтесь", new_user_registration_path}
   %span.footer
     .item
-      Опубликованно : 
+      Опубликованно :
       = time_ago_in_words @article.created_at
     .item
-      Просмотров : 
+      Просмотров :
       %span.view= @article.views
     .item
       Комментариев :

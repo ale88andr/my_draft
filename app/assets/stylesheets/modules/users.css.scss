@@ -1,28 +1,6 @@
 .users {
 	table {
 		width: 100%;
-
-		th {
-			background-color: #ebeef4;
-			padding: 8px;
-			border-left: 2px solid #fff;
-		}
-
-		td {
-			padding: 3px;
-			padding-left: 6px;
-			a:hover {
-				text-decoration: underline;
-			}
-
-		}
-
-		tr:hover {
-			background-color:#ebeef4;
-			border-bottom-color:#dde2ed;
-			border-top:solid 1px #dde2ed;
-			cursor: pointer;
-		}
 	}
 }
 
@@ -70,6 +48,10 @@
 		color: #fff;
 	}
 
+}
+
+.user-info {
+	
 }
 
 @import "register";

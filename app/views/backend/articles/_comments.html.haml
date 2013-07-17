@@ -1,0 +1,12 @@
+%ol.rounded-list
+	- @article.comments.each do |comment|
+		%li.rectangle-list
+			.user
+				= image_tag "/img/default_user_avatar.png" #comment.user.avatar ||
+			.body
+				.username
+					Оставил пользователь : <b>#{link_to @article.user.username, user_path(@article.user.id)}</b>, #{format_date comment.created_at}
+				%br
+				.content
+					= comment.body
+			.clearfix

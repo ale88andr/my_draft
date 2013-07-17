@@ -39,7 +39,7 @@
 		
 	.admin-panel
 		%ul
-			%li= link_to "Редактировать", edit_admin_user_path(@user)
-			%li= link_to "Удалить", admin_user_path(@user), :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить пользователя '#{@user.username}'" }
-			%li= link_to "К списку Пользователей", admin_users_path
+			%li= link_to "Редактировать", edit_backend_user_path(@user)
+			%li= link_to "Удалить", backend_user_path(@user), :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить пользователя '#{@user.username}'" }
+			%li= link_to "К списку Пользователей", backend_users_path
 .clearfix

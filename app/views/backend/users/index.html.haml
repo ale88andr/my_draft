@@ -1,0 +1,16 @@
+-provide(:title, "Просмотр списка зарегистрированных пользователей")
+%h1.headline1 Список зарегистрированных пользователей:
+.new_link= link_to "Создать нового пользователя", new_user_registration_path
+-unless @users.empty?
+	%table.little-table
+		%tr
+			%th Логин:
+			%th UID:
+			%th Email:
+			%th Привилегии:
+			%th Пол:
+			%th Дата регистрации:
+			%th Профиль:
+			%th	Профиль:
+			%th Аккаунт:
+		=render @users

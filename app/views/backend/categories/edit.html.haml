@@ -1,0 +1,7 @@
+- provide(:title, "Редактирование категории")
+%h1.headline1 Редактирование категории '#{@category.name}'
+%br
+= render 'form'
+%br
+= link_to 'Назад', backend_categories_path
+%br

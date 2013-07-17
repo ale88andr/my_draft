@@ -1,0 +1,8 @@
+- provide(:title, "#{@category.name}")
+.category
+	%h2= @category.name
+	.description= @category.description
+	%br
+	.paginate= paginate @articles
+	= render @articles
+	.paginate= paginate @articles

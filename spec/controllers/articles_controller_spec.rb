@@ -78,7 +78,7 @@ describe ArticlesController do
 
       end
 
-      context "When save message rwturn false" do
+      context "When save message return false" do
 
         before :each do
           article.stub(:save).and_return(false)
@@ -91,7 +91,7 @@ describe ArticlesController do
 
         it "should flash error message exists" do
           post :create
-          expect(flash[:error]).not_to be_nil 
+          expect(flash[:error]).not_to be_nil
         end
 
 
@@ -142,12 +142,33 @@ describe ArticlesController do
           expect(response).to render_template(:show)
         end
 
+        context "#increment!" do
+
+          before :each do
+            @article = Article.create(id: 1, title: "article", views: 0, category_id: 1, content: "content" )
+            Article.stub(:find).and_return(@article)
+          end
+
+          it "increments a views property" do
+            expect{ get :show, id: 1 }.to change(@article.views)
+          end
+
+        end
+
       end
 
       context "on non existing article" do
 
         before :each do
           Article.stub(:find).and_raise(ActiveRecord::RecordNotFound)
+        end
+
+        it "should redirects to articles index url" do
+          expect(response).redirect_to articles_path
+        end
+
+        it "should have flash error message" do
+          expect(flash[:error]).not_to be_nil
         end
 
       end
@@ -163,6 +184,7 @@ describe ArticlesController do
       }
 
       let!(:article) { stub_model(Article, id: 1) }
+
       before do
         Article.stub(:find).and_return(article)
       end
@@ -173,7 +195,7 @@ describe ArticlesController do
       end
 
 
-    end
+    end#PUT 'update'
 
   end
 

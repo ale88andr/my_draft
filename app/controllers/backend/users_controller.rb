@@ -1,6 +1,4 @@
-﻿class Admin::UsersController < ApplicationController
-
-  load_and_authorize_resource
+﻿class Backend::UsersController < Backend::ApplicationController
 
   def index
     @users = User.named

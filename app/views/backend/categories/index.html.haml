@@ -1,0 +1,16 @@
+﻿- provide(:title, "Редактирование категорий")
+.categories
+	%h1.headline1 Список доступных категорий
+	.new_link= link_to "Создать новую категорию", new_backend_category_path
+	%table.little-table
+		%tr
+			%th Наименование категории
+			%th Описание категории
+			%th Количество статей в категории
+			%th Просмотр
+			%th Редактирование
+			%th Действие
+		- if !@categories.empty?
+			= render @categories
+		- else
+			.no-item Пока ничего не добавленно

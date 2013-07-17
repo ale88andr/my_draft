@@ -10,4 +10,5 @@
   		redirect_to article_path(@article), notice:"Возникли ошибки при добавлении комментария"
   	end
   end
+  
 end

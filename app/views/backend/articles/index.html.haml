@@ -1,0 +1,27 @@
+-provide(:title, "Администрирование статей")
+%h1.headline1 Администрирование статей :
+#articles
+  .new_link
+    = link_to "Создать новую статью", new_backend_article_path
+    %br
+    = link_to 'Статьи ожидающие публикации', unpublished_articles_path
+  - if !@articles.empty?
+    .paginate= paginate @articles
+    %table.little-table
+      %tr
+        %th Наименование статьи
+        %th Категория статьи
+        %th Количество просмотров
+        %th Публикация
+        %th Автор
+        %th Дата создания
+        %th Редактирование
+        %th Действие
+      = render @articles
+    .paginate= paginate @articles
+    %br
+  - else
+    .no-content
+      К сожалению опубликованных статей пока нет!
+  
+.clearfix

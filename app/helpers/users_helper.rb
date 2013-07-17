@@ -19,8 +19,8 @@
 		is_email_show = email === true ? "Email доступен другим пользователям" : "Email недоступен другим пользователям"
 	end
 
-	def format_date(date)
-		"#{date.day}-#{date.month}-#{date.year} в #{date.hour}:#{date.min}"
+	def format_user_date(date)
+		date.to_formatted_s(:user_datetime)
 	end
 
 end

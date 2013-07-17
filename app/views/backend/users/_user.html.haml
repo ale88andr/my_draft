@@ -1,0 +1,11 @@
+%tr
+	%td 
+		%b= user.username
+	%td= user.id
+	%td= user.email
+	%td= perms user.role_ids[0]
+	%td= user.user_sex ||= 'Не указан'
+	%td= format_user_date user.created_at
+	%td= link_to "Просмотр", backend_user_path(user)
+	%td= link_to "Редактировать", edit_backend_user_path(user)
+	%td= link_to "Удалить", backend_user_path(user), :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить пользователя '#{user.username}'" }

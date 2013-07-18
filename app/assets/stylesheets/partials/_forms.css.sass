@@ -12,8 +12,24 @@
 		:margin-left 25px
 		:border 1px solid #e0e0e0
 
-	input[type="text"], input[type="password"], input[type="email"], textarea
-		:width 300px
+/*------------------------------ backend-middle-form -----------------------------*/
+
+.backend-middle-form
+	.field
+		:margin-bottom 1.5em
+
+	.form-wrapper
+		:background-color #f3f3f1
+		:padding 15px
+		:width 92%
+		@include border-radius(3px)
+		:margin-left 25px
+		:border 1px solid #e0e0e0
+
+	textarea
+		:height 900px
+
+	select
 		:color #aaa
 		:border 1px solid #ddd
 		:border-radius 3px
@@ -25,4 +41,17 @@
 		:-o-transition 0.1s all
 		:transition 0.1s all
 
-/*------------------------------ backend-middle-form -----------------------------*/
+/*------------------------------ ################### -----------------------------*/
+
+input[type="text"], input[type="password"], input[type="email"], textarea
+	:width 98%
+	:color #aaa
+	:border 1px solid #ddd
+	:border-radius 3px
+	:box-shadow 0 2px 5px rgba(0,0,0,0.1) inset
+	:outline none
+	:padding 10px 0.5em
+	:-webkit-transition 0.1s all
+	:-moz-transition 0.1s all
+	:-o-transition 0.1s all
+	:transition 0.1s all

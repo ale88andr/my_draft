@@ -1,8 +1,9 @@
 - provide(:title, "Редактирование статьи '#{@article.title}'")
-%h1 Редактирование статьи '#{@article.title}'
+%h1.headline1 Редактирование статьи '#{@article.title}'
 
 = render 'form'
-
+%br
 = link_to 'Просмотр', @article
 \|
 = link_to 'Назад', articles_path
+%br

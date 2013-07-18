@@ -5,7 +5,11 @@
   before_filter :getTags, :only => [:new, :edit, :show, :index]
 
   def index
-    @articles = Article.order("created_at DESC").page(params[:page]).per(10) 
+    if params[:unpublished]
+      @articles = Article.unpublished.page(params[:page]).per(5)
+    else
+      @articles = Article.order("created_at DESC").page(params[:page]).per(10)
+    end
   end
 
   def show

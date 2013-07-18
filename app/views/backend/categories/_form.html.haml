@@ -1,4 +1,4 @@
-﻿= form_for @category, html: { class: "backend-little-form" } do |f|
+﻿= form_for [:backend, @category], html: { class: "backend-little-form" } do |f|
   .form-wrapper  
     - if @category.errors.any?
       = render "common/errors", object: @category

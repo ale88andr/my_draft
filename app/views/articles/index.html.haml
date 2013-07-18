@@ -4,6 +4,7 @@
   .articles-links
     %ul
       %li Статьи :
+      %li= link_to "Все | ", articles_path
       %li= link_to "За сутки | ", articles_path + '/option/tooday'
       %li= link_to "За неделю | ", articles_path + '/option/week' 
       %li= link_to "За месяц | ", articles_path + '/option/month'
@@ -17,11 +18,6 @@
     .no-content
       К сожалению опубликованных статей пока нет!
     %br
-
-  - if can? :create, Article
-    = link_to 'Создать новую статью', new_article_path
-    %br
-    = link_to 'Статьи ожидающие публикации', unpublished_articles_path
 #aside
   %ul 
     %h3 Список категорий :

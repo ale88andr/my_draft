@@ -3,7 +3,8 @@ MyDraft::Application.routes.draw do
   namespace :backend do
     resources :users, :tags, :categories
     resources :articles do
-      get 'unpublished', :on => :collection
+      #get 'unpublished', :on => :collection
+      get ':unpublished', :action => :index, :on => :collection
       resources :comments, :only => [:create, :edit, :destroy]
     end
   end

@@ -1,0 +1,17 @@
+- provide(:title, "Авторизация пользователя")
+= form_for(resource, :as => resource_name, :url => session_path(resource_name), html:{id:'loginForm'}) do |f|
+  %h2 Вход в аккаунт
+  .field
+    = f.label :username, "Имя пользователя :"
+    = f.text_field :username, :value => "Ваше имя :", :onfocus => "this.value = ''"
+  .field
+    = f.label :password, "Пароль :"
+    = f.password_field :password, :value => "Ваш пароль", :onfocus => "this.value = ''"
+  .submit
+    - if devise_mapping.rememberable?
+      = f.check_box :remember_me
+      Остаться в системе
+    = f.submit "Войти"
+%br
+%br
+= render "devise/shared/links"

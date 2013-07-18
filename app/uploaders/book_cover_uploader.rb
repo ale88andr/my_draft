@@ -7,7 +7,7 @@ class BookCoverUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    "uploads/books_cover/#{model.id}"
+    "#{Rails.root}/public/uploads/books_cover/#{model.id}"
   end
 
   process :resize_to_fit => [200, 300]

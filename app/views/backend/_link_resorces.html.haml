@@ -1,5 +1,5 @@
-#admin-res
-	%h3 Здраствуйте, #{current_user.username}. Добро пожаловать в панель администратора
+#backend-dashboard
+	%h3 Здраствуйте, #{current_user.username}. Добро пожаловать в панель администрирования
 	.admin-item
 		%span Ресурсы пользователей :
 		%br
@@ -20,3 +20,11 @@
 		%ul
 			%li= link_to "Администрирование тегов", backend_tags_path
 			%li= link_to "Добавление тегов", new_backend_tag_path
+	.admin-item
+		%span Книги :
+		%br
+		%ul
+			%li= link_to "Администрирование книг", backend_books_path
+			%li= link_to "Добавление книги", new_backend_book_path
+			%li= link_to "Администрирование категорий книг", backend_book_categories_path
+			%li= link_to "Добавление категории", new_backend_book_category_path

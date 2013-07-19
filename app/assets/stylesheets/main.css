@@ -147,27 +147,6 @@ h1 {
         padding: 10px;
     }
 
-    #admin-res {
-        padding: 10px;
-        margin-top: 5px;
-        background: #fff0f0;
-        border: 1px dashed #f38670;
-        overflow: hidden;
-    }
-
-    #admin-res ul li {
-        list-style-type: none;
-    }
-
-    #admin-res ul li a:hover {
-        text-decoration: underline;
-    }
-
-    .admin-item {
-        float: left;
-        width: 32%;
-    }
-
     /* Пагинация */
 
     .paginate {

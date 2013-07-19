@@ -1,0 +1,18 @@
+- provide(:title, "Просмотр списка существующих книг")
+.categories
+	%h1.headline1 Список добавленных книг
+	.new_link= link_to "Создать книгу", new_backend_book_path
+	.new_link= link_to "Создать категорию", new_backend_book_category_path
+	%table.little-table
+		%tr
+			%th Название
+			%th Язык
+			%th Дата добавления
+			%th Категория книги
+			%th Просмотр
+			%th Редактирование
+			%th Действие
+		- if !@books.empty?
+			= render @books
+		- else
+			.no-item Пока ничего не добавленно

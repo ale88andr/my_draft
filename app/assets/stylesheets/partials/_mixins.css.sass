@@ -7,7 +7,7 @@
   -moz-box-shadow: $left $top $blur $color
   box-shadow: $left $top $blur $color
 
-@mixin border-radius($radius)
+@mixin border-radius($radius: 3px)
   -webkit-border-radius: $radius
   -moz-border-radius: $radius
   -o-border-radius: $radius
@@ -15,3 +15,17 @@
 
 @mixin _border($color, $style: solid)
   border: 1px $style $color
+
+@mixin transition($val...)
+  :-webkit-transition $val
+  :-moz-transition $val
+  :transition $val
+
+@mixin highlight($color, $side)
+  :border-#{$side}-color $color
+
+@mixin button_primary($background, $border, $text-shadow)
+  @include border-radius(1px)
+  @include _border($border)
+  :background $background
+  :text-shadow 0 1px 0 $text-shadow

@@ -1,0 +1,11 @@
+%tr
+  %td= book.title
+  %td= book.language
+  %td= book.created_at
+  %td
+    - book.book_categories.each do |category|
+      = category.name
+      %br
+  %td= link_to "Просмотр", backend_book_path(book)
+  %td= link_to "Редактировать", edit_backend_book_path(book)
+  %td= link_to "Удалить", book, method: :delete, data:{ confirm: "Вы уверенны, что хотите удалить категорию '#{book.title}'?" }

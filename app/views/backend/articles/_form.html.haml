@@ -2,7 +2,6 @@
   .form-wrapper
     - if @article.errors.any?
       = render "common/errors", object: @article
-
     .field
       = f.label :title, "Заголовок статьи :"
       = f.text_field :title, placeholder:"Введите сюда название статьи", class: "span9"

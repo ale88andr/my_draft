@@ -144,7 +144,7 @@
 		color: #555;
 		text-shadow: 0 1px 0 #fff;
 		display: block;
-		border: 1px solid #CACACA;
+		@include _border(#CACACA);
 		border-bottom: 0 none;
 		background-color: #f7f7f7;
 		background-repeat: repeat-x;

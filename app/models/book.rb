@@ -1,7 +1,9 @@
 ﻿class Book < ActiveRecord::Base
 
 	#web form access
-	attr_accessible :title, :author, :description, :year, :publisher, :language, :number_of_pages, :ISBN10, :ISBN13, :link_to_book, :category_of_book, :book_img
+	attr_accessible :title, :author, :description, :year, :publisher, :language, :number_of_pages, :ISBN10, :ISBN13, :link_to_book, :category_of_book, :book_img, :book_category_ids
+
+	has_and_belongs_to_many :book_categories, association_foreign_key: 'book_categories_id'
 
 	#validations
 	VALID_LINK_FORMAT = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:+#]*[\w\-\@?^=%&amp;+#])?/i

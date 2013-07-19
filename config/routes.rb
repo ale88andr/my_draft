@@ -1,9 +1,8 @@
 MyDraft::Application.routes.draw do
 
   namespace :backend do
-    resources :users, :tags, :categories
+    resources :users, :tags, :categories, :books, :book_categories
     resources :articles do
-      #get 'unpublished', :on => :collection
       get ':unpublished', :action => :index, :on => :collection
       resources :comments, :only => [:create, :edit, :destroy]
     end
@@ -20,7 +19,6 @@ MyDraft::Application.routes.draw do
   devise_for :users
 
   get "users/show"
-
   get "comments/create"
 
   resources :categories, :only => [:show, :index]

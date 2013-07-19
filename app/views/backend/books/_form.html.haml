@@ -43,7 +43,12 @@
 		%br
 	.field
 		= f.label :category_of_book, "Категория к которой относится данная книга"
-		= f.text_field :category_of_book
+		- @categories.each do |category|
+			- if @book.book_category_ids.include? category.id
+				= check_box_tag "book[book_category_ids][]", category.id, type: 'checked'
+			- else
+				= check_box_tag "book[book_category_ids][]", category.id
+			= category.name
 		%br
 	.field
 		= f.label :book_img, "Изображение книги"

@@ -1,0 +1,29 @@
+Feature: describing basic functionality of articles module
+
+  Any site user can access to views a list of published articles and
+  browse detail view single article. Each of article should have only
+  one category, many tags and comments. Only registered users can add
+  comment to article
+
+  Scenario: Any user should see a list of existing articles
+    Given I am a guest user
+    And Articles "Post1,Post2,Post3" existing
+    When I visiting index page of article module
+    Then I should see a list of "Post1,Post2,Post3" articles with nav elements
+
+  Scenario: Any user should see a detail view of a single article
+    Given Articles "Post1" existing
+    And I am a guest user which visited index page of article module
+    When I click to detail view link
+    Then I should see a detail article view
+
+  Scenario: A guest user should not see an adding comment form
+    Given Articles "Post1" existing
+    When I visit detail article view link
+    Then I should see a detail article view without add comment form
+
+  Scenario: A registered user should see adding comment form
+    Given Articles "Post1" existing
+    And I am a registered user
+    When I visit detail article view link
+    Then I should see a detail article view with add comment form

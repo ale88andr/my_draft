@@ -11,4 +11,9 @@ FactoryGirl.define do
     id    1
   end
 
+  factory :category do
+    name                'Test category'
+    description         'Test category description'
+  end
+
 end

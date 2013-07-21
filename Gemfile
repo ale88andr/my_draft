@@ -11,7 +11,6 @@ gem 'haml-rails'
 # media
 gem 'carrierwave'
 gem 'mini_magick', '3.5.0'
-gem 'ckeditor_rails', '~> 4.0.1.1'
 
 # auth
 gem 'devise'

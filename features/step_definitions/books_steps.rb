@@ -7,11 +7,6 @@ end
 
 # Scenario: Views a list of book
 
-Given /^I am a Guest user$/ do
-	visit root_path
-	page.should have_link('Войти')
-end
-
 And /^I visit index page which contains any books$/ do
 	step "Any books exists"
 	step "I visit books page"
@@ -61,12 +56,13 @@ Given /^I am a admin user$/ do
 	click_button("Войти")
 	page.should have_content('oQo')
 	page.should have_link('Выход')
+	page.should have_link('Перейти в административную часть приложения')
 end
 
 And /^I visit a page which contains fields to create new book resourse item$/ do
-	visit new_book_path
-	current_url.should =~ /books\/new/
-	within('#new_book') do
+	visit new_backend_book_path
+	current_url.should =~ /backend\/books\/new/
+	within('#loginForm') do
 		page.should have_field("book_title")
 		page.should have_field("book_author")
 		page.should have_field("book_year")
@@ -80,7 +76,7 @@ And /^I visit a page which contains fields to create new book resourse item$/ do
 end
 
 When /^I fill a new book form with valid params$/ do
-	within('form#new_book') do
+	within('form#loginForm') do
 		fill_in "book_title", with: "title"
 		fill_in "book_author", with: "author"
 		fill_in "book_year", with: 1990
@@ -104,7 +100,7 @@ end
 # Scenario: Adding a book with invalid params
 
 When /^I fill a new book form with invalid params$/ do
-	within('form#new_book') do
+	within('form#loginForm') do
 		fill_in "book_title", with: "bad_title"
 		click_button("Сохранить")
 	end
@@ -112,7 +108,7 @@ end
 
 Then /^I will see a new book page with error message$/ do
 	current_url.should =~ /books/
-	expect(page).to have_selector('form#new_book')
+	expect(page).to have_selector('form#loginForm')
 	expect(page).to have_content("Возникли ошибки при создании новой книги")
 end
 
@@ -134,7 +130,7 @@ end
 
 Then /^I should see a error message$/ do
 	current_path.should eq(books_path)
-	expect(page).should have_content("Книги с такими параметрами не существует")
+	expect(page).to have_content("Книги с такими параметрами не существует")
 end
 
 #!end --Scenario: Views a non existing book

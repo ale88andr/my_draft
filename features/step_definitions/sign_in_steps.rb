@@ -1,5 +1,5 @@
 ﻿def filling_signin_form(username,password)
-	within('form#new_user') do
+	within('form#loginForm') do
 		fill_in "user_username", with: username
 		fill_in "user_password", with: password
 	end
@@ -28,7 +28,7 @@ Then /^I should see an signin error message$/ do
 	page.should have_selector('span.alert', text: "Сообщение: Invalid email or password.")
 end
 
-And /^I a user which have an account$/ do
+And /^I am user which have an account$/ do
 	User.find_by_username('oQo').should_not be_nil
 end
 

@@ -22,11 +22,12 @@ Then /^I should see a list of (.+) articles with nav elements$/ do |titles|
   titles.split(',').each_with_index do |title, index|
     #post = Article.find_by_title(title)
 
-    page.should have_content(@post[index].title)
-    page.should have_link(@post[index].title, href: article_path(@post[index].id))
-    page.should have_link(@post[index].category.name, href: category_path(@post[index].category_id))
-    page.should have_content(@post[index].views)
-
+    within '#articles' do
+      page.should have_content(@post[index].title)
+      page.should have_link(@post[index].title, href: article_path(@post[index].id))
+      page.should have_link(@post[index].category.name, href: category_path(@post[index].category_id))
+      page.should have_content(@post[index].views)
+    end
   end
 end
 
@@ -85,3 +86,4 @@ Then /^I should see a detail article view with add comment form$/ do
 end
 
 # --end Scenario: A registered user should see adding comment form
+

@@ -38,6 +38,9 @@
     if @article.update_attributes(params[:article])
       redirect_to @article, notice: 'Статья обновленна.'
     else
+      flash[:error] = "При обновлении статьи возникли ошибки"
+      getCategories
+      getTags
       render "edit"
     end
   end

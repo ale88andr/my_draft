@@ -6,4 +6,4 @@
   %td= article.user.username
   %td= format_article_date article.created_at
   %td= link_to "Редактирование", edit_backend_article_path(article)
-  %td= link_to "Удалить", article, method: :delete, data:{ confirm: "Вы уверенны, что хотите удалить статью '#{article.title}'?" }
+  %td= link_to "Удалить", backend_article_path(article), method: :delete, data:{ confirm: "Вы уверенны, что хотите удалить статью '#{article.title}'?" }

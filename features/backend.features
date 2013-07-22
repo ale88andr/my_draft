@@ -1,0 +1,12 @@
+Feature: Backend module
+
+  Scenario: Only registered user can access to backend module
+  	Given I am a guest user
+  	When I visit a backend url
+  	Then I should redirect to root url
+  	And I should see error access message
+
+  Scenario: Admin user can access to backend module
+  	Given I am a registered user
+  	When I visit a backend url
+  	Then I should see admin resources links

@@ -1,4 +1,4 @@
-Feature: Backend articles module
+﻿Feature: Backend articles module
 
 	Scenario: Manage articles list
 		Given I am a registered user
@@ -12,20 +12,20 @@ Feature: Backend articles module
 		Given I am a registered user
 		And Any articles are added
 		And Exists unpublished article
-		When I visit unpublished articles backend url
+		When I visit index articles backend page and click on unpublished articles link
 		And I should see link to all articles
 		And I should see unpublished article
 		But I should not see published articles
 
-	Scenario: Detail view of a single article
-		Given I am a registered user
+  Scenario: Detail view of a single article
+    Given I am a registered user
     And Articles "Post1" existing
     When I visited show page of backend article module
     Then I should see a detail article view
     And I should see editind and destroy links
 
   Scenario: Editing a single article
-		Given I am a registered user
+    Given I am a registered user
     And Articles "Post1" existing
     When I visit articles backend url
     And I should see edit "Post1" link
@@ -34,7 +34,7 @@ Feature: Backend articles module
     And I should see saving button
 
   Scenario: Save editing values to article
-		Given I am a registered user
+    Given I am a registered user
     And Articles "Post1" existing
     And I visit edit articles backend url
     When I feeling "New post title", as title "New post content", as content changes into editing form
@@ -44,7 +44,7 @@ Feature: Backend articles module
     And I should see "New post title" article in list of article
 
   Scenario: Save editing values to article with invalid data
-		Given I am a registered user
+    Given I am a registered user
     And Articles "Post1" existing
     And I visit edit articles backend url
     When I feeling article with empty title
@@ -52,3 +52,20 @@ Feature: Backend articles module
     Then Article should not be changed
     And I should redirect to editing form with error message
 
+  Scenario: Create article with valid params
+    Given I am a registered user
+    When I visit articles backend url
+    And Click new article link
+    Then I should see form for adding new article
+    And I feeling "New post title", as title "New post content", as content, "Программирование" as category into new form
+    Then New article must be added to the database when I click on save button
+    And I should redirect to show "New post title" page with successfully message
+    And I should not see "New article title" in the list of article
+    But If I visit backend unpublished articles list "New post title" should be there
+
+  Scenario: Create article with invalid params
+    Given I am a registered user visiting new articles link
+    And I should see form for adding new article
+    When I try save empty fields of title and content
+    Then Article should no to be added to the database
+    And I should redirect to new article form page with error message

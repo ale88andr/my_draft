@@ -40,8 +40,11 @@ And /^Exists unpublished article$/ do
 	@unpublished_posts = FactoryGirl.create(:article, published: false)
 end
 
-When /^I visit unpublished articles backend url$/ do
-	visit backend_articles_path + '/unpublished'
+When /^I visit index articles backend page and click on unpublished articles link$/ do
+	visit backend_articles_path
+	within '#articles' do
+		page.click_link('Статьи ожидающие публикации')
+	end
 end
 
 And /^I should see link to all articles$/ do
@@ -169,3 +172,89 @@ And /^I should redirect to editing form with error message$/ do
 end
 
 # --end Scenario: Save editing values to article with invalid data
+
+# Scenario: Create article with valid params
+
+And /^Click new article link$/ do
+	page.find_link('Создать новую статью').click
+	expect(page.current_path).to eq(new_backend_article_path)
+end
+
+Then /^I should see form for adding new article$/ do
+	expect(page).to have_content('> Создание новой статьи')
+	within '#new_article' do
+		expect(page.find_field('Заголовок статьи :')).not_to be_nil
+		expect(page.find_field('Содержание статьи :')).not_to be_nil
+		expect(page.find_field('Выберите категорию :')).not_to be_nil
+		expect(page.find('#article_published')).not_to be_nil
+		find(:xpath, "//select[@id = 'article_category_id']/option[text() = 'Программирование']")
+		Tag.all.each_with_index do |tag, index|
+			expect(find(:xpath, "//input[@id = 'article_tag_ids_'][#{index + 1}]")).not_to be_nil
+			page.should have_content(tag.name)
+		end
+		expect(page.find_button('Сохранить')).not_to be_nil
+	end
+end
+
+And /^I feeling (.+), as title (.+), as content, (.+) as category into new form$/ do |title, content, category|
+	expect(page).to have_content('> Создание новой статьи')
+	within "#new_article" do
+		fill_in('article[title]', with: title)
+		fill_in('article[content]', with: content)
+		select("Программирование", from: "article[category_id]")
+	end
+end
+
+Then /^New article must be added to the database when I click on save button$/ do
+	expect{click_button("Сохранить")}.to change(Article, :count).by(1)
+end
+
+And /^I should redirect to show (.+) page with successfully message$/ do |title|
+	expect(page.current_path).to eq article_path(Article.find_by_title(title).id)
+	expect(page.find('.notice').text).to eq('Сообщение: Статья была успешно созданна.')
+end
+
+And /^I should not see (.+) in the list of article$/ do |title|
+	visit articles_path
+	page.should_not have_content(title)
+end
+
+But /^If I visit backend unpublished articles list (.+) should be there$/ do |title|
+	visit unpublished_backend_articles_path
+	page.should have_link(title)
+end
+
+# --end Scenario: Create article with valid params
+
+# Scenario: Create article with invalid params
+
+Given /^I am a registered user visiting new articles link$/ do
+	step "I am a registered user"
+	visit new_backend_article_path
+	page.current_url =~ /backend\/articles\/new/
+end
+
+When /^I try save empty fields of title and content$/ do
+	expect(page).to have_content('> Создание новой статьи')
+	within "#new_article" do
+		fill_in('article[title]', with: '')
+		fill_in('article[content]', with: '')
+		select("Программирование", from: "article[category_id]")
+	end
+end
+
+Then /^Article should no to be added to the database$/ do
+	expect{click_button "Сохранить"}.not_to change(Article, :count)
+end
+
+And /^I should redirect to new article form page with error message$/ do
+	expect(page.current_path).to eq backend_articles_path
+	expect(find('span.error').text).to eq "Сообщение: При создании новой статьи возникли ошибки"
+	within '#error_explanation' do
+		expect(all('.error')).not_to be_nil
+		expect(all('.error')[1].text).to eq "Title - Это поле не должно быть пустым"
+		expect(all('.error')[0].text).to eq "Content - Это поле должно содержать данные"
+	end
+end
+
+# --end Scenario: Create article with invalid params

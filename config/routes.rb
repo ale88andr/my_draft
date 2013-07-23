@@ -3,7 +3,7 @@ MyDraft::Application.routes.draw do
   namespace :backend do
     resources :users, :tags, :categories, :books, :book_categories
     resources :articles do
-      get 'unpublished', :action => :index, :on => :collection, :path => "/backend/articles/unpublished"
+      get 'unpublished', :action => :unpublished, on: :collection
       resources :comments, :only => [:create, :edit, :destroy]
     end
   end
@@ -29,7 +29,7 @@ MyDraft::Application.routes.draw do
   get "static_pages/home"
   get "/about", :to => 'static_pages#about'
   get "static_pages/help"
-  
+
   root :to => 'static_pages#home'
 
 end

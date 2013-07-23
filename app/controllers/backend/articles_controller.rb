@@ -5,11 +5,7 @@
   before_filter :getTags, :only => [:new, :edit, :show, :index]
 
   def index
-    if params[:unpublished]
-      @articles = Article.unpublished.page(params[:page]).per(5)
-    else
       @articles = Article.order("created_at DESC").page(params[:page]).per(10)
-    end
   end
 
   def show
@@ -29,6 +25,7 @@
       redirect_to @article, notice: "Статья была успешно созданна."
     else
       getCategories
+      getTags
       flash[:error] = "При создании новой статьи возникли ошибки"
       render "new"
     end
@@ -52,6 +49,7 @@
 
   def unpublished
     @articles = Article.unpublished.page(params[:page]).per(5)
+    render 'index'
   end
 
   private

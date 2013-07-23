@@ -5,7 +5,7 @@
     - if can? :create, Article
       = link_to "Создать новую статью", new_backend_article_path
       %br
-      = params[:unpublished] ? link_to('Все статьи', backend_articles_path) : link_to('Статьи ожидающие публикации', backend_articles_path + '/unpublished')
+      = params[:action] == 'unpublished' ? link_to('Все статьи', backend_articles_path) : link_to('Статьи ожидающие публикации', unpublished_backend_articles_path)
   - if !@articles.empty?
     .paginate= paginate @articles
     %table.little-table
@@ -23,5 +23,5 @@
     %br
   - else
     .no-content
-      К сожалению опубликованных статей пока нет! 
+      К сожалению опубликованных статей пока нет!
 .clearfix

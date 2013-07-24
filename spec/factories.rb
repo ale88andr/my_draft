@@ -12,6 +12,10 @@ FactoryGirl.define do
     id    1
   end
 
+  factory :tag do
+    name                'Test tag'
+  end
+
   factory :category do
     name                'Test category'
     description         'Test category description'

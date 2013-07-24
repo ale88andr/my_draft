@@ -258,3 +258,21 @@ And /^I should redirect to new article form page with error message$/ do
 end
 
 # --end Scenario: Create article with invalid params
+
+# Scenario: Delete single article
+
+When /^I click on delete article link article (.+) should be delete from database$/ do |title|
+	expect(page.current_path).to eq backend_articles_path
+	within "#articles" do
+		expect(page.find_link('Удалить', href: backend_article_path(@post.first.id))).not_to be_nil
+	end
+	expect{ click_link 'Удалить' }.to change(Article, :count).by(-1)
+	expect( Article.find_by_title(title) ).to be_nil
+end
+
+Then /^I should redirect to articles list and article (.+) is no find$/ do |title|
+	expect(page.current_path).to eq backend_articles_path
+	page.should_not have_content title
+end
+
+# --end Scenario: Delete single article

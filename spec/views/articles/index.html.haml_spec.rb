@@ -2,11 +2,11 @@
 
 describe "articles/index.html.haml" do
 
+  include Devise::TestHelpers
+
   before :each do
     user = FactoryGirl.create(:user)
-    @ability = Ability.new(user)
-    @ability.extend(CanCan::Ability)
-    controller.stub(:current_ability) { @ability }
+    sign_in(user)
   end
 
   it "renders a list of articles" do

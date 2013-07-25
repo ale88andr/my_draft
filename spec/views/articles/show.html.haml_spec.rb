@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 describe "articles/show" do
-  
+
+  include Devise::TestHelpers
+
   before :each do
     user = FactoryGirl.create(:user)
-    @ability = Ability.new(user)
-    @ability.extend(CanCan::Ability)
-    controller.stub(:current_ability) { @ability }
-    controller.stub(:current_user) { user }
+    sign_in(user)
   end
 
   it "renders single article attributes" do

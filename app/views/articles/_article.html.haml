@@ -26,7 +26,7 @@
       = link_to 'Читать полностью', article
     -if can? :manage, Article
       .manage-item
-        = link_to 'Редактировать', edit_article_path(article)
+        = link_to 'Редактировать', edit_backend_article_path(article)
         = link_to 'Удалить', article, :method => :delete, :data => { :confirm => "Вы уверенны, что хотите удалить статью '#{article.title}'?" }
 .clearfix
 %br

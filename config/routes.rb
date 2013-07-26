@@ -8,7 +8,7 @@ MyDraft::Application.routes.draw do
     end
   end
 
-  resources :articles do
+  resources :articles, :only => [:show, :index] do
     # kaminari
     get 'page/:page', :action => :index, :on => :collection
     get 'unpublished', :on => :collection

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "articles/show" do
-
+  
   include Devise::TestHelpers
 
   before :each do
@@ -10,6 +10,7 @@ describe "articles/show" do
   end
 
   it "renders single article attributes" do
+
     article = FactoryGirl.create(:article)
     assign(:article, article)
     render
@@ -20,6 +21,7 @@ describe "articles/show" do
     expect(rendered).to have_content article.content
     expect(rendered).to have_content article.user.username
     expect(rendered).to have_content article.views
+  
   end
 
 end#articles/show

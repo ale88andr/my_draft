@@ -2,13 +2,13 @@ MyDraft::Application.routes.draw do
 
   namespace :backend do
     resources :users, :tags, :categories, :books, :book_categories
-    resources :articles do
+    resources :articles, constraints: { :id => /[0-9]+(\%7C[0-9]+)*/ } do
       get 'unpublished', :action => :unpublished, on: :collection
       resources :comments, :only => [:create, :edit, :destroy]
     end
   end
 
-  resources :articles, :only => [:show, :index] do
+  resources :articles, :only => [:show, :index], constraints: { :id => /[0-9]+(\%7C[0-9]+)*/ } do
     # kaminari
     get 'page/:page', :action => :index, :on => :collection
     get 'unpublished', :on => :collection

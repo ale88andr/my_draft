@@ -23,7 +23,7 @@ describe ArticlesController do
       it "routes to #index option : month" do
         expect(get("/articles/option/month")).to route_to(controller: 'articles', action: 'index', :option => "month")
       end
-    end
+    end#accessible routes
 
     context "prohibited routes" do
       it "routes to #new not to be routable" do
@@ -45,7 +45,7 @@ describe ArticlesController do
       it "routes to #destroy not to be routable" do
         expect(delete("/articles/1")).not_to be_routable
       end
-    end
+    end#prohibited routes
 
   end
 end

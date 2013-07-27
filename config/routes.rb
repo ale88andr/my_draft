@@ -32,4 +32,6 @@ MyDraft::Application.routes.draw do
 
   root :to => 'static_pages#home'
 
+  match '*path', :to => 'application#routing_error'
+
 end

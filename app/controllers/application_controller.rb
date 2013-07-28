@@ -17,7 +17,7 @@
 
     def routing_error(status, exception = nil)
       @not_found_path = request.url
-      render status: status, template: "/errors/route_error_#{status}.html.haml", layout: false
+      render status: status, template: "/errors/route_error_#{status}.html.haml", layout: 'errors/route_error'
       false
     end
 

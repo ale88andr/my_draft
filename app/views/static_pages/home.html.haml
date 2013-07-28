@@ -1,3 +1,17 @@
-- provide(:title, "Home")
+﻿- provide(:title, "Главная")
 %h1 My Draft
 %p= link_to "My Draft", :controller => :static_pages, :action => :home
+
+.last-articles
+  - if @presenter.last_articles.present?
+    - @presenter.last_articles.each do |article|
+      = article.title
+  - else
+    No articles are present
+
+.tooday-articles
+  - if @presenter.tooday_articles.present?
+    - @presenter.tooday_articles.each do |article|
+      = article.title
+  - else
+    No articles are present tooday

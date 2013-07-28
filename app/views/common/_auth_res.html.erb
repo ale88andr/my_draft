@@ -8,7 +8,7 @@
 				<li><%= link_to "Выход", destroy_user_session_path %></li>
 				<% if can? :manage, :all %>
 					<li>&nbsp|&nbsp</li>
-					<li><%= link_to "Управление сайтом", backend_users_path %>
+					<li><div class='manage-item'><%= link_to "Управление сайтом", backend_users_path %></div>
 				<% end %>
 			<% else %>
 				<li><%= link_to "Войти", new_user_session_path %></li>

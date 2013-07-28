@@ -6,6 +6,10 @@
 				<li><%= link_to "Мой профиль", edit_user_registration_path %></li>
 				<li>&nbsp|&nbsp</li>
 				<li><%= link_to "Выход", destroy_user_session_path %></li>
+				<% if can? :manage, :all %>
+					<li>&nbsp|&nbsp</li>
+					<li><%= link_to "Управление сайтом", backend_users_path %>
+				<% end %>
 			<% else %>
 				<li><%= link_to "Войти", new_user_session_path %></li>
 				<li>&nbsp|&nbsp</li>

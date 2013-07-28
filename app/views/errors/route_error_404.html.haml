@@ -1,12 +1,17 @@
 ﻿- provide :title, 'Server says - 404 :('
 = content_for :http_error_page do
-  %h2 404
-  %div
-    %h3 We're sorry
+
+  .header
+    %h1 404 :( We're sorry
+  .content
     %p
       The content that you requested could not be found.
     %p
       You tried to access '#{@not_found_path}', which is not a valid page.
+
+
+  #image
+    = image_tag("/img/404.jpg")
     %p
       Want to
       %a{href: root_path} go back to our home page

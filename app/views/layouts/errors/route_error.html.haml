@@ -12,7 +12,9 @@
 
         %title= full_title(yield :title)
 
+        = stylesheet_link_tag "partials/error_page"
+
         = csrf_meta_tags
 
-    %body{ id: 'http_error_page', style: 'background: #3f5d81; color: white' }
-        = yield :http_error_page
+    %body{ id: 'http_error_page' }
+        #error_page= yield :http_error_page

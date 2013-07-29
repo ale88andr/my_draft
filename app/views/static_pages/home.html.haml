@@ -3,13 +3,33 @@
 %p= link_to "My Draft", :controller => :static_pages, :action => :home
 
 .last-articles
+  .header-item
+    %p Последние опубликованные статьи:
   - if @presenter.last_articles.present?
     - @presenter.last_articles.each do |article|
-      = article.title
+      .post
+        .postmetadata
+          %span.date
+            %span.month= article.created_at.strftime("%b")
+            %span.day= article.created_at.strftime("%d")
+            %span.year= article.created_at.year
+          %span.author
+            by
+            = article.user.username
+        .content
+          %h3.title= link_to article.title.capitalize, article
+          .article-category
+            Опубликованно в
+            %br
+            = link_to article.category.name, '#'
   - else
     No articles are present
-
+%br
+#clear
+%br
 .tooday-articles
+  .header-item
+    %p Последние опубликованные статьи:
   - if @presenter.tooday_articles.present?
     - @presenter.tooday_articles.each do |article|
       = article.title

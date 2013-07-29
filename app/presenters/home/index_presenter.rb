@@ -12,5 +12,4 @@ class Home::IndexPresenter
     Article.top_views.where("created_at >= ?", 1.month.ago)
   end
 
-
 end

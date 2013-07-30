@@ -24,14 +24,43 @@
             = link_to article.category.name, '#'
   - else
     No articles are present
-%br
-#clear
-%br
-.tooday-articles
+
+  = link_to "Перейти к Блогу ->", articles_path, class: "index-link"
+  %br 
+  %br 
+
+.blog-left-items
   .header-item
-    %p Последние опубликованные статьи:
-  - if @presenter.tooday_articles.present?
-    - @presenter.tooday_articles.each do |article|
-      = article.title
-  - else
-    No articles are present tooday
+    %p Cтатьи опубликованые сегодня:
+  .item-content
+    - if @presenter.tooday_articles.present?
+      - @presenter.tooday_articles.each do |article|
+        = article.title
+    - else
+      No articles are present tooday
+  %br
+  %br
+  .header-item
+    %p Последние комментарии:
+  .item-content
+    - if @presenter.last_comments.present?
+      - @presenter.last_comments.each do |comment|
+        Оставил: 
+        = comment.user.username
+        в статье
+        = link_to comment.article.title, comment.article
+        %br
+    - else
+      No comments are present
+
+.blog-right-items
+  .header-item-right
+    %p Популярное:
+  .item-content
+    - if @presenter.top_articles_from_month.present?
+      - @presenter.tooday_articles.each do |article|
+        = article.title
+    - else
+      No articles are present in this tab
+
+.clearfix

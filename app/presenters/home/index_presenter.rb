@@ -12,4 +12,8 @@ class Home::IndexPresenter
     Article.top_views.where("created_at >= ?", 1.month.ago)
   end
 
+  def last_comments(item_limit = 3)
+  	Comment.last.limit(item_limit)
+  end
+
 end

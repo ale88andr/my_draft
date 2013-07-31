@@ -7,15 +7,7 @@
   load_and_authorize_resource
 
   def index
-    @articles = Article
-    @articles = case params[:option]
-      when 'tooday'     then @articles.tooday
-      when 'month'      then @articles.month
-      when 'week'       then @articles.week
-      when 'top_views'  then @articles.top_views
-      else @articles.published
-    end
-    @articles = @articles.page(params[:page]).per(5) 
+    @articles = Article.includes(:category, :tags).get_articles_by_pages(params[:option], params[:page])
   end
 
   def show
@@ -25,7 +17,7 @@
   private
 
     def findArticleById
-      @article = Article.find(params[:id])
+      @article = Article.includes(:tags, :comments).find(params[:id])
     end
 
     def getCategories

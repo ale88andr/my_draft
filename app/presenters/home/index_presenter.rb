@@ -1,5 +1,7 @@
 class Home::IndexPresenter
 
+  extend ActiveSupport::Memoizable
+
   def last_articles(item_limit = 3)
     Article.published.limit(item_limit)
   end
@@ -15,5 +17,7 @@ class Home::IndexPresenter
   def last_comments(item_limit = 3)
   	Comment.last.limit(item_limit)
   end
+
+  memoize :last_articles, :top_articles_from_month
 
 end

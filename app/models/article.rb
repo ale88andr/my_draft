@@ -18,9 +18,24 @@
   scope :last,        order("created_at DESC")
   scope :published,   last.where("published = ?", true)
   scope :unpublished, where("published = ?", false)
-  scope :tooday,      published.where("created_at >= ?", 1.day.ago)
-  scope :week,        published.where("created_at >= ?", 1.week.ago)
-  scope :month,       published.where("created_at >= ?", 1.month.ago)
+  scope :tooday,      lambda { where("created_at >= ?", 1.day.ago).
+                      published }
+  scope :week,        lambda { where("created_at >= ?", 1.week.ago).
+                      published }
+  scope :month,       lambda { where("created_at >= ?", 1.month.ago).
+                      published }
   scope :top_views,   order("views DESC").published.limit(10)
+
+  # class methods
+  def Article.get_articles_by_pages(option=nil, current_page=nil, per_page=5)
+    @articles = case option
+      when 'tooday'     then self.tooday
+      when 'month'      then self.month
+      when 'week'       then self.week
+      when 'top_views'  then self.top_views
+      else self.published
+    end
+    @articles.page(current_page).per(per_page)
+  end
 
 end

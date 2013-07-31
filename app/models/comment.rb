@@ -9,4 +9,14 @@
 
   scope :last, order("created_at DESC")
 
+  def Comment.create_comment_by_user(author, comment, to_article_id)
+    comment = author.comments.new(comment)
+    comment.article_id = to_article_id
+    if comment.save
+      "Ваш комментарий добавлен к статье"
+    else
+      "Возникли ошибки при добавлении комментария"
+    end
+  end
+
 end

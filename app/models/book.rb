@@ -5,6 +5,9 @@
 
 	has_and_belongs_to_many :book_categories, association_foreign_key: 'book_categories_id'
 
+	before_validation {title.squish.capitalize}
+  before_validation {author.squish.capitalize}
+
 	#validations
 	VALID_LINK_FORMAT = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:+#]*[\w\-\@?^=%&amp;+#])?/i
 
@@ -20,5 +23,7 @@
 
 	#uploader
 	mount_uploader :book_img, BookCoverUploader
+
+	scope :last, order("created_at DESC")
 
 end

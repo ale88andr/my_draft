@@ -1,11 +1,13 @@
 ﻿class Backend::ArticlesController < Backend::ApplicationController
 
+  helper_method :getCategories, :getTags
+
   before_filter :findArticleById, :only => [:edit, :update, :show, :destroy]
-  before_filter :getCategories, :only => [:new, :edit, :index]
-  before_filter :getTags, :only => [:new, :edit, :show, :index]
+  before_filter :getCategories, :only => [:index]
+  before_filter :getTags, :only => [:show, :index]
 
   def index
-      @articles = Article.order("created_at DESC").page(params[:page]).per(10)
+      @articles = Article.last.includes(:category, :tags).page(params[:page]).per(10)
   end
 
   def show
@@ -24,8 +26,6 @@
     if @article.save
       redirect_to @article, notice: "Статья была успешно созданна."
     else
-      getCategories
-      getTags
       flash[:error] = "При создании новой статьи возникли ошибки"
       render "new"
     end
@@ -36,8 +36,6 @@
       redirect_to @article, notice: 'Статья обновленна.'
     else
       flash[:error] = "При обновлении статьи возникли ошибки"
-      getCategories
-      getTags
       render "edit"
     end
   end
@@ -59,11 +57,11 @@
     end
 
     def getCategories
-      @categories = Category.all
+      @categories ||= Category.all
     end
 
     def getTags
-      @tags = Tag.all
+      @tags ||= Tag.all
     end
 
 end

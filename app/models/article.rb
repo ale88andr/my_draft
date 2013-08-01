@@ -5,7 +5,8 @@
   has_many :comments, dependent: :destroy
   has_and_belongs_to_many :tags
 
-  before_save {title.squish.capitalize}
+  before_validation {title.squish.capitalize}
+  before_validation {content.squish.capitalize}
 
   attr_accessible :content, :published, :title, :category_id, :views, :tag_ids
 

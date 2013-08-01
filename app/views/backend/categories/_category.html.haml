@@ -1,7 +1,7 @@
 %tr
 	%td= category.name
 	%td= category.description
-	%td= category.articles.count
+	%td= category.articles.size
 	%td= link_to "Статьи данной категории", backend_category_path(category)
 	%td= link_to "Редактировать", edit_backend_category_path(category)
 	%td= link_to "Удалить", category, method: :delete, data:{ confirm: "Внимание при удалении категории будут удаленны все статьи входящие в неё! Вы уверенны, что хотите удалить категорию '#{category.name}'?" }

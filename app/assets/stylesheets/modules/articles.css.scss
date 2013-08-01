@@ -4,19 +4,30 @@
 }
 
 #aside {
-	padding: 0 5px;
+	
 	margin-left: 820px;
 
+	ul {
+		margin: 10px 5px;
+	}
+
 	h3 {
-		background-color: #e4ebee;
-		padding: 5px;
 		color: #333;
 		text-align: center;
+		float: left;
+		font-size: 15px;
+		text-transform: uppercase;
+		margin-top: 0;
+		margin-bottom: 10px;
+		padding: 5px 10px;
+		min-height: 25px;
+		line-height: 25px;
 	}
 
 	li {
 		list-style: none;
 		padding: 0 5px;
+		margin-top: 5px;
 	}
 
 	li a.atag {
@@ -119,11 +130,10 @@
 	}
 }
 
-.articles-links {
-
-	background-color: #e4ebee;
-	padding: 5px;
-
+.header-item {
+	ul {
+		margin: 15px 10px;
+	}
 	ul li {
 		display: inline-block;
 	}

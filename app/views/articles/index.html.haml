@@ -1,7 +1,7 @@
 -provide(:title, "Просмотр статей")
 %h1 Содержание блога :
 #articles
-  .articles-links
+  .header-item
     %ul
       %li Статьи :
       %li= link_to "Все | ", articles_path
@@ -21,10 +21,10 @@
 #aside
   %ul 
     %h3 Список категорий :
-  - @categories.each do |category|
-    %li= link_to category.name, category
+    - @categories.each do |category|
+      %li= link_to category.name, category
   %ul
     %h3 Список тегов :
-  - @tags.each do |tag|
-    %li= link_to tag.name, tag, class:"atag"
+    - @tags.each do |tag|
+      %li= link_to tag.name, tag, class:"atag"
 .clearfix

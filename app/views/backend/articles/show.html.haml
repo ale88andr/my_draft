@@ -25,7 +25,7 @@
       .name
         %h1= @article.title
       .content
-        = @article.content
+        = raw @article.content
       %br
       .tags
         - Tag.find(@article.tag_ids).each do |tag|
@@ -59,7 +59,7 @@
       %span.view= @article.views
     .item
       Комментариев :
-      %span.view= @article.comments.count
+      %span.view= @article.comments.size
     .item
       Автор :
       = @article.user.username

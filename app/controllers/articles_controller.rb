@@ -21,11 +21,11 @@
     end
 
     def getCategories
-      @categories = Category.all
+      @categories ||= Category.all
     end
 
     def getTags
-      @tags = Tag.all
+      @tags ||= Tag.all
     end
 
 end

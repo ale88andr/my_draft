@@ -13,6 +13,6 @@
 			%tr
 				%td= index + 1
 				%td= tag.name
-				%td= tag.articles.count
+				%td= tag.articles.size
 				%td= link_to "Статьи с этим тегом", backend_tag_path(tag)
 				%td= link_to "Удалить", tag, method: :delete, data:{confirm:"Тег '#{tag.name}' будет удалён!"}

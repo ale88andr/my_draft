@@ -18,6 +18,10 @@ class Home::IndexPresenter
   	Comment.last.limit(item_limit)
   end
 
+  def last_books(item_limit = 3)
+    Book.last.limit(item_limit)
+  end
+
   memoize :last_articles, :top_articles_from_month
 
 end

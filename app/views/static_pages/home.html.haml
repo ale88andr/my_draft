@@ -63,4 +63,29 @@
     - else
       No articles are present in this tab
 
+%br
+%br
+.clearfix
+%br
+%br
+
+.last-books
+  .header-item-right
+    %p Последние добавленные книги:
+  - if @presenter.last_books.present?
+    - @presenter.last_books.each do |book|
+      .book-item
+        = link_to image_tag(book.book_img, size:'200x300'), book
+        %br
+        .title
+          = link_to book.title, book
+        .author
+          = book.author
+  - else
+    No books are present in this tab
+  %br
+  = link_to "Перейти к списку книг ->", books_path, class: "index-link"
+  %br 
+  %br 
+
 .clearfix

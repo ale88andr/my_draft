@@ -17,13 +17,13 @@
       %br
     .field
       = f.label :category_id,  "Выберите категорию :"
-      = f.collection_select :category_id, @categories, :id, :name
+      = f.collection_select :category_id, getCategories, :id, :name
       %br
       %span.input-helper Укажите категорию в которую будет помещенна статья
       %br
     .field
       = f.label :tag_ids,  "Выберите теги :"
-      - @tags.each do |tag|
+      - getTags.each do |tag|
         - if @article.tag_ids.include? tag.id
           = check_box_tag "article[tag_ids][]", tag.id, type: 'checked'
         - else

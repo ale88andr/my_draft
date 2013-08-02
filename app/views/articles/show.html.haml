@@ -21,7 +21,7 @@
       %br
       .author
         Автор :
-        = link_to @article.user.username, user_path(@article.user.id)
+        = link_to @article.author_username, user_path(@article.user.id)
       .name
         %h1= @article.title
       .content
@@ -68,5 +68,5 @@
       %span.view= @article.comments.size
     .item
       Автор :
-      = @article.user.username
+      = @article.author_username
 .clearfix

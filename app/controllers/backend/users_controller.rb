@@ -11,7 +11,7 @@
   def update
     getUserByIdFromGet
     if @user.update_attributes(params[:user])
-      redirect_to admin_users_path, notice: "Сведения о пользователе '#{@user.username}' обновленны."
+      redirect_to backend_users_path, notice: "Сведения о пользователе '#{@user.username}' обновленны."
     else
       render "edit"
     end

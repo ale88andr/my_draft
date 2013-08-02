@@ -2,6 +2,8 @@
   
   belongs_to :user
   belongs_to :article
+
+  delegate :username, to: :user, allow_nil: true, :prefix => :author
   
   attr_accessible :body
 

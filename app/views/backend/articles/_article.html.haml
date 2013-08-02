@@ -3,7 +3,7 @@
   %td= article.category.name
   %td= article.views
   %td= article.published === true ? 'Да' : 'Нет'
-  %td= article.user.username
+  %td= article.author_username
   %td= format_article_date article.created_at
   %td= link_to "Редактирование", edit_backend_article_path(article)
   %td= link_to "Удалить", backend_article_path(article), method: :delete, data:{ confirm: "Вы уверенны, что хотите удалить статью '#{article.title}'?" }

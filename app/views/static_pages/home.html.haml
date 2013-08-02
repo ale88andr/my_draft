@@ -15,7 +15,7 @@
             %span.year= article.created_at.year
           %span.author
             by
-            = article.user.username
+            = article.author_username
         .content
           %h3.title= link_to article.title.capitalize, article
           .article-category

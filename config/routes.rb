@@ -30,7 +30,8 @@ MyDraft::Application.routes.draw do
   get "/about", :to => 'static_pages#about'
   get "static_pages/help"
 
-  root :to => 'static_pages#home'
+  root to: 'backend/index_pages#home', constraints: {subdomain: 'backend'}
+  root to: 'static_pages#home'
 
   #unless Rails.application.config.consider_all_requests_local
     match '*path', to: 'application#error_from_route'

@@ -15,6 +15,8 @@
   validates :title, length:{:maximum => 255, :too_long => " - Это поле слишком длинное, придумайте название покороче", :minimum => 1, :too_short => " - Это поле не должно быть пустым"}
   validates :category_id, presence:{:message => " - Вам необходимо выбрать категорию"}
 
+  delegate :username, to: :user, allow_nil: true, :prefix => :author
+
   # scopes
   scope :last,        order("created_at DESC")
   scope :published,   last.where("published = ?", true)

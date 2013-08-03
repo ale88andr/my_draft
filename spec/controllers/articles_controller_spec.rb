@@ -2,9 +2,9 @@
 
 describe ArticlesController do
 
-  describe "when user doesnt have login" do
+  describe "when user not login" do
 
-    describe "POST 'create'" do
+    describe ".create" do
 
       it "redirects to root url" do
         post :create

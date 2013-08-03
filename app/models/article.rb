@@ -1,14 +1,14 @@
 ﻿class Article < ActiveRecord::Base
-  
+
   belongs_to :user
   belongs_to :category
   has_many :comments, dependent: :destroy
   has_and_belongs_to_many :tags
 
+  attr_accessible :content, :published, :title, :category_id, :views, :tag_ids
+
   before_validation {title.squish.capitalize}
   before_validation {content.squish.capitalize}
-
-  attr_accessible :content, :published, :title, :category_id, :views, :tag_ids
 
   # validations
   validates :content, presence:{:message => " - Это поле должно содержать данные"}

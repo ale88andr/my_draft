@@ -7,7 +7,7 @@
   before_filter :getTags, :only => [:show, :index]
 
   def index
-      @articles = Article.last.includes(:category, :tags).page(params[:page]).per(10)
+    @articles = Article.last.includes(:category, :tags).page(params[:page]).per(10)
   end
 
   def show

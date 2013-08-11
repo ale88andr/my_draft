@@ -68,5 +68,15 @@ module MyDraft
     config.assets.version = '1.0'
 
     config.autoload_paths += %W(#{config.root}/presenters)
+
+    config.generators do |g|
+        g.test_framework :rspec,
+            :view_specs => false,
+            :helper_specs => false,
+            :routing_specs => false,
+            :controller_specs => true,
+            :request_specs => true
+    end
+
   end
 end

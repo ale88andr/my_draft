@@ -11,7 +11,6 @@
   end
 
   def show
-    @article.increment! :views
   end
 
   def new
@@ -24,7 +23,7 @@
   def create
     @article = current_user.articles.new(params[:article])
     if @article.save
-      redirect_to @article, notice: "Статья была успешно созданна."
+      redirect_to backend_article_path(@article), notice: "Статья была успешно созданна."
     else
       flash[:error] = "При создании новой статьи возникли ошибки"
       render "new"

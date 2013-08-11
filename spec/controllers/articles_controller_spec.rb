@@ -45,9 +45,9 @@ describe ArticlesController do
       let!(:article) { stub_model(Article).as_new_record }
       let!(:params) do
         {
-          "title" => "MyNewArticleTitle",
-          "content" => "MyNewArticleContent",
-          "category_id" => '1',
+          title: "MyNewArticleTitle",
+          content: "MyNewArticleContent",
+          category_id: '1',
         }
       end
 
@@ -55,7 +55,7 @@ describe ArticlesController do
         Article.stub(:new).and_return(article)
       end
 
-      it "sends new article to Article class" do
+      it "sends new" do
         Article.should_receive(:new).with(params)
         post :create, article: params
       end
@@ -66,9 +66,9 @@ describe ArticlesController do
           article.stub(:save).and_return(true)
         end
 
-        it "redirects to articles index" do
+        it "redirects to show articles" do
           post :create, article: params
-          expect(response).to redirect_to articles_path
+          expect(response).to redirect_to article_path
         end
 
         it "assigns a success flash message" do

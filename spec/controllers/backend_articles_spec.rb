@@ -169,6 +169,7 @@ describe Backend::ArticlesController do
 
       before :each do
         Article.stub(:find).and_raise(ActiveRecord::RecordNotFound)
+        get :show, id: '999999'
       end
 
       xit "render error page" do
@@ -297,6 +298,50 @@ describe Backend::ArticlesController do
 
     context "when user not login" do
       before { get :edit, id: 1 }
+      it_should_behave_like "guest user"
+    end
+
+  end
+
+  describe "#destroy" do
+
+    context "when user login" do
+
+      login_admin
+
+      before :each do
+        @item = FactoryGirl.create(:article)
+        Article.stub(:find).and_return(article)
+      end
+
+      let!(:article) { mock_model(Article).as_null_object }
+
+      it "sends find" do
+        Article.should_receive(:find).with(@item.id.to_s)
+        delete :destroy, id: @item.id
+      end
+
+      context "destroy return true" do
+
+        before do
+          Article.stub(:destroy).and_return(true)
+        end
+
+        xit "expect that article delete" do
+          expect{ delete :destroy, id: @item }.to change(Article,:count).by(-1)
+        end
+
+        it "redirect to index page" do
+          delete :destroy, id: @item.id
+          expect(response).to redirect_to backend_articles_path
+        end
+
+      end
+
+    end
+
+    context "when user not login" do
+      before { delete :destroy, id: 1 }
       it_should_behave_like "guest user"
     end
 

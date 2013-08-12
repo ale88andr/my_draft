@@ -4,10 +4,10 @@
 
   rescue_from CanCan::AccessDenied, with: :no_permission
 
-  unless Rails.application.config.consider_all_requests_local
+  #unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, with: lambda { |exception| routing_error 500, exception }
     rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| routing_error 404, exception }
-  end
+  #end
 
   def error_from_route
     routing_error 404

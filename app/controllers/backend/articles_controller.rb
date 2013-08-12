@@ -32,7 +32,7 @@
 
   def update
     if @article.update_attributes(params[:article])
-      redirect_to @article, notice: 'Статья обновленна.'
+      redirect_to backend_article_path(@article), notice: 'Статья обновленна.'
     else
       flash[:error] = "При обновлении статьи возникли ошибки"
       render "edit"

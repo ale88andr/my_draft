@@ -2,20 +2,21 @@ require 'spec_helper'
 
 describe Backend::ArticlesController do
 
+  share_examples_for "guest user" do
+    it "redirects to sign in page" do
+      expect(response).to redirect_to new_user_session_path
+    end
+
+    it "assigns error flash message" do
+      expect(flash[:alert]).not_to be_nil
+    end
+  end
+
   describe "#create" do
 
     context "when user not login" do
-
       before { post :create }
-
-      it "redirects to sign in page" do
-        expect(response).to redirect_to new_user_session_path
-      end
-
-      it "assigns error flash message" do
-        expect(flash[:alert]).not_to be_nil
-      end
-
+      it_should_behave_like "guest user"
     end# when user not login
 
     context "when user logged in" do
@@ -82,9 +83,10 @@ describe Backend::ArticlesController do
 
     context "when user logged in" do
 
+      login_admin
+
       let!(:article) { mock_model('Article').as_new_record }
       before(:each) do
-        login_as_admin
         Article.stub(:new).and_return(article)
       end
 
@@ -101,17 +103,8 @@ describe Backend::ArticlesController do
     end
 
     context "when user not login" do
-
       before { get :new }
-
-      it "redirects to sign in page" do
-        expect(response).to redirect_to new_user_session_path
-      end
-
-      it "assigns error flash message" do
-        expect(flash[:alert]).not_to be_nil
-      end
-
+      it_should_behave_like "guest user"
     end
 
   end# #new
@@ -120,9 +113,10 @@ describe Backend::ArticlesController do
 
     context "when user logged in" do
 
+      login_admin
+
       let!(:articles) { stub_model(Article) }
       before :each do
-        login_as_admin
         get :index
       end
 
@@ -137,17 +131,8 @@ describe Backend::ArticlesController do
     end
 
     context "when user not login" do
-
       before { get :index }
-
-      it "redirects to sign in page" do
-        expect(response).to redirect_to new_user_session_path
-      end
-
-      it "assigns error flash message" do
-        expect(flash[:alert]).not_to be_nil
-      end
-
+      it_should_behave_like "guest user"
     end
 
   end# #index
@@ -156,16 +141,18 @@ describe Backend::ArticlesController do
 
     context "when article exists" do
 
-      let!(:article) { stub_model(Article) }
-      @item = Article.create(id: 1001, title: "article", views: 0, category_id: 1, content: "content" )
+      login_admin
+
+      let!(:item) { FactoryGirl.create(:article) }
+      let!(:article) { stub_model(Article).as_null_object }
 
       before :each do
         Article.stub(:find).and_return(article)
       end
 
-      it "sends find message to model" do
-        Article.should_receive(:find).with(@item.id)
-        get :show, id: @item.id
+      it "sends find" do
+        Article.should_receive(:find).with(item.id.to_s)
+        get :show, id: item.id
       end
       it "assigns @article variable" do
         get :show, id: 1
@@ -176,19 +163,6 @@ describe Backend::ArticlesController do
         expect(response).to render_template(:show)
       end
 
-      context "#increment!" do
-
-        before :each do
-          @article = Article.create(id: 1, title: "article", views: 0, category_id: 1, content: "content" )
-          Article.stub(:find).and_return(@article)
-        end
-
-        it "increments a views property" do
-          expect{ get :show, id: 1 }.to change(@article.views)
-        end
-
-      end
-
     end
 
     context "on non existing article" do
@@ -197,16 +171,135 @@ describe Backend::ArticlesController do
         Article.stub(:find).and_raise(ActiveRecord::RecordNotFound)
       end
 
-      it "should redirects to articles index url" do
-        expect(response).redirect_to articles_path
+      xit "render error page" do
+        expect(response).to render_template "errors/route_error_404.html"
       end
 
-      it "should have flash error message" do
-        expect(flash[:error]).not_to be_nil
+      xit "404 error message" do
+        expect(response).to have_content "404"
       end
 
     end
 
-  end#GET 'show'
+    context "when user not login" do
+      before { get :show, id: 1 }
+      it_should_behave_like "guest user"
+    end
+
+  end# #show
+
+  describe "#update" do
+
+    context "when user login" do
+
+      login_admin
+
+      let!(:item) { FactoryGirl.create(:article) }
+      let!(:article) { stub_model(Article).as_null_object }
+      params = {
+        "title" => "another article title",
+        "content" => "another article content",
+        "category_id" => "1"
+      }
+
+      before do
+        Article.stub(:find).and_return(article)
+      end
+
+      it "sends find" do
+        Article.should_receive(:find).with(item.id.to_s)
+        put :update, id: item.id, article: params
+      end
+
+      it "assigns @article variable" do
+        put :update, id: item.id, article: params
+        expect(assigns[:article]).to eq(article)
+      end
+
+      context "when update_attributes return true" do
+
+        before do
+          Article.stub(:update_attributes).and_return(true)
+          put :update, id: item.id, article: params
+        end
+
+        xit "redirect to show" do
+          expect(response).to redirect_to backend_article_path(item.id)
+        end
+
+        it "with success message" do
+          expect(flash[:notice]).not_to be_nil
+        end
+
+      end
+
+      context "when update_attributes return false" do
+
+        invalid_params = {
+          "title" => "",
+          "content" => "",
+          "category_id" => ""
+        }
+
+        before do
+          Article.stub(:update_attributes).and_return(false)
+          put :update, id: item.id, article: invalid_params
+        end
+
+        it "redirect to edit" do
+          expect(response).to render_template(:edit)
+        end
+
+        it "with error message" do
+          expect(flash[:error]).not_to be_nil
+        end
+
+      end
+
+    end
+
+    context "when user not login" do
+      before { put :update, id: 1 }
+      it_should_behave_like "guest user"
+    end
+
+  end# #update
+
+  describe "#edit" do
+
+    context "when user login" do
+
+      login_admin
+
+      let!(:item) { FactoryGirl.create(:article) }
+      let!(:article) { mock_model(Article).as_null_object }
+
+      before do
+        Article.stub(:find).and_return(article)
+      end
+
+      it "sends find" do
+        Article.should_receive(:find).with(item.id.to_s)
+        get :edit, id: item.id
+      end
+
+      it "render edit template" do
+        get :edit, id: item.id
+        expect(response).to render_template(:edit)
+      end
+
+      it "assigns @article" do
+        get :edit, id: item.id
+        expect(assigns[:article]).to eq(article)
+      end
+
+    end
+
+    context "when user not login" do
+      before { get :edit, id: 1 }
+      it_should_behave_like "guest user"
+    end
+
+  end
 
 end

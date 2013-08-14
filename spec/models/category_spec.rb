@@ -1,4 +1,5 @@
-﻿require 'spec_helper'
+﻿#encoding: utf-8
+require 'spec_helper'
 
 describe Category do
 
@@ -42,9 +43,9 @@ describe Category do
     context "default scope" do
 
       before :each do
-        @cat_1 = FactoryGirl.create(:category, name: "Bored")
-        @cat_2 = FactoryGirl.create(:category, name: "Course")
-        @cat_3 = FactoryGirl.create(:category, name: "Armed")
+        @cat1 = FactoryGirl.create(:category, name: "Bored")
+        @cat2 = FactoryGirl.create(:category, name: "Course")
+        @cat3 = FactoryGirl.create(:category, name: "Armed")
       end
 
       subject { Category.all }

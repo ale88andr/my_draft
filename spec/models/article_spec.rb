@@ -2,11 +2,9 @@ require 'spec_helper'
 
 describe Article do
 
-	let!(:article) { Article.new }
+	subject { Article.new }
 
-	subject {article}
-
-	it{ Article.superclass.should eq(ActiveRecord::Base) }
+	it { Article.superclass.should eq(ActiveRecord::Base) }
 
 	it { should respond_to :title }
 	it { should respond_to :content }
@@ -15,26 +13,30 @@ describe Article do
 	it { should respond_to :views }
 	it { should respond_to :published }
 
-	describe "association with models" do
+	context "delegate" do
+		it { should respond_to :author_username }
+	end
+
+	describe "model association" do
 
 		def associated_with_model(associated_with, association_type)
 			assoc = Article.reflect_on_association(associated_with)
 			assoc.macro.should == association_type
 		end
 
-		it "should associates with category" do
+		it "with category" do
 			associated_with_model(:category, :belongs_to)
 		end
 
-		it "should associates with user" do
+		it "with user" do
 			associated_with_model(:user, :belongs_to)
 		end
 
-		it "should associates with tag" do
+		it "with tag" do
 			associated_with_model(:tags, :has_and_belongs_to_many)
 		end
 
-		it "should associates with comments" do
+		it "with comments" do
 			associated_with_model(:comments, :has_many)
 		end
 
@@ -42,45 +44,104 @@ describe Article do
 
 	describe "model validation" do
 
-		before :each do
-			@params = {
-				title: 		"new_article title",
-				content: 	"new_article content",
-				category_id: 1 
-			}
+		it "with valid data" do
+			FactoryGirl.build(:article).should be_valid
 		end
 
-		context "created article with invalid data" do
+		it "with empty title is invalid" do
+			FactoryGirl.build(:article, title: "").should_not be_valid
+		end
 
-			after :each do
-				article = Article.new(@params)
-				expect(article).not_to be_valid
+		it "with long title is invalid" do
+			FactoryGirl.build(:article, title: "z" * 256).should_not be_valid
+		end
+
+		it "with empty content is invalid" do
+			FactoryGirl.build(:article, content: "").should_not be_valid
+		end
+
+		it "with empty category is invalid" do
+			FactoryGirl.build(:article, category_id: "").should_not be_valid
+		end
+
+	end
+
+	describe "model scopes" do
+
+		context "when published or not" do
+
+			before :each do
+				@published = FactoryGirl.create(:article, published: true)
+				@unpublished = FactoryGirl.create(:article, published: false)
 			end
 
-			it "create article without title" do
-				@params[:title] = ''
+			it ".published" do
+				Article.published.should_not include @unpublished
 			end
 
-			it "create article with long title" do
-				@params[:title] = 'z' * 500
-			end
-
-			it "create article without content" do
-				@params[:content] = ''
-			end
-
-			it "create article without category" do
-				@params[:category_id] = nil
+			it ".unpublished" do
+				Article.unpublished.should_not include @published
 			end
 
 		end
 
-		context "created article with valid data" do
+		context "with date constrains" do
 
-			it {
-				article = Article.new(@params)
-				expect(article).to be_valid
-			}
+			share_examples_for "ordered records" do
+				it "by date" do
+					scope.should == [@tooday, @week, @month]
+				end
+			end
+
+			before :each do
+				@tooday = FactoryGirl.create(:article)
+				@week = FactoryGirl.create(:article, created_at: 1.week.ago + 1)
+				@month = FactoryGirl.create(:article, created_at: 1.month.ago + 1)
+			end
+
+			context ".last" do
+
+				it_should_behave_like "ordered records" do
+					let(:scope) { Article.last }
+				end
+
+			end
+
+			context ".tooday" do
+
+				subject { Article.tooday }
+
+				it "not include older that tooday records" do
+					should_not include [@week, @month]
+				end
+
+				it "include only tooday records" do
+					should include @tooday
+				end
+
+			end
+
+			context ".week" do
+
+				subject { Article.week }
+
+				it "not include older that week records" do
+					should_not include @month
+				end
+
+				it "include only week records" do
+					should == [@tooday, @week]
+				end
+
+			end
+
+			context ".month" do
+
+				it_should_behave_like "ordered records" do
+					let(:scope) { Article.month }
+				end
+
+			end
 
 		end
 

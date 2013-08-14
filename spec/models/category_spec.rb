@@ -2,8 +2,7 @@
 
 describe Category do
 
-  let!(:category) { Category.new }
-  subject {category}
+  subject { Category.new }
 
   it { should respond_to :name }
   it { should respond_to :description }
@@ -12,7 +11,7 @@ describe Category do
 
   describe "associations" do
 
-    it "should associated with articles" do
+    it "with articles" do
       assoc = Category.reflect_on_association(:articles)
       assoc.macro.should == :has_many
     end
@@ -21,31 +20,39 @@ describe Category do
 
   describe "validation model" do
 
-    before :each do
-      @params = {
-        name:         "new category_name",
-        description:  "new category_description"
-      }
-    end
-
-    context "with invalid values" do
-      it "adding category with empty name" do
-        @params[:name] = nil
-        category = Category.new(@params)
-        expect(category).not_to be_valid
+    context "invalid values" do
+      it "with empty name" do
+        FactoryGirl.build(:category, name: nil).should_not be_valid
       end
-      it "adding too long name category" do
-        @params[:name] = 'z' * 500
-        category = Category.new(@params)
-        expect(category).not_to be_valid
+      it "with long name" do
+        FactoryGirl.build(:category, name: "z" * 256).should_not be_valid
       end
     end
 
-    context "with valid values" do
-      it "adding category with valid data" do
-        category = Category.new(@params)
-        expect(category).to be_valid
+    context "valid values" do
+      it "with valid data" do
+        FactoryGirl.build(:category).should be_valid
       end
+    end
+
+  end
+
+  describe "scopes" do
+
+    context "default scope" do
+
+      before :each do
+        @cat_1 = FactoryGirl.create(:category, name: "Bored")
+        @cat_2 = FactoryGirl.create(:category, name: "Course")
+        @cat_3 = FactoryGirl.create(:category, name: "Armed")
+      end
+
+      subject { Category.all }
+
+      it "with order by name" do
+        should == [@cat_3, @cat_1, @cat_2]
+      end
+
     end
 
   end

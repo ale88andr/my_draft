@@ -1,38 +1,27 @@
 require 'spec_helper'
 
 describe Tag do
-  
-	let!(:tag) {Tag.new}
 
-	subject{tag}
+	subject { Tag.new }
 
-	it {should respond_to :name}
-
-	it "model inheritance from ActiveRecord" do
-		expect(Tag.superclass).to eq(ActiveRecord::Base)
-	end
-
-	it "responds to name" do
-		tag.name = "new_tag_name"
-		expect(tag.name).to eq("new_tag_name")
-	end
+	it { should respond_to :name }
+	it { expect(Tag.superclass).to eq(ActiveRecord::Base) }
 
 	describe "association" do
-
-		it "should associate with article model" do
+		it "with article" do
 			assoc = User.reflect_on_association(:articles)
 			assoc.macro.should == :has_many
 		end
-		
-	end	
+	end# association
 
-	describe "validation tags" do
-
+	describe "validation" do
 		it "with invalid data" do
-			tag = Tag.new(name:nil)
-			expect(tag).not_to be_valid
+			expect(Tag.new(name:nil)).not_to be_valid
 		end
 
-	end
+		it "with valid data" do
+			expect(Tag.new(name:"Tag")).to be_valid
+		end
+	end# validation
 
 end

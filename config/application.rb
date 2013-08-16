@@ -76,6 +76,8 @@ module MyDraft
             :routing_specs => false,
             :controller_specs => true,
             :request_specs => true
+        g.test_framework  :rspec, :fixture => true
+        g.fixture_replacement :factory_girl, :dir=>"spec/factories"
     end
 
   end

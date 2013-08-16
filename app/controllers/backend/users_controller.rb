@@ -13,6 +13,7 @@
     if @user.update_attributes(params[:user])
       redirect_to backend_users_path, notice: "Сведения о пользователе '#{@user.username}' обновленны."
     else
+      flash[:error] = "Сведения о пользователе не обновленны."
       render "edit"
     end
   end
@@ -23,7 +24,7 @@
 
   def destroy
     getUserByIdFromGet.destroy
-    redirect_to admin_users_path, notice: 'Пользователь удалён!'
+    redirect_to backend_users_path, notice: 'Пользователь удалён!'
   end
 
   protected
